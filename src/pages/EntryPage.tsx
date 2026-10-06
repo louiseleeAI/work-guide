@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { entryMap, book, chapterMap } from '../data'
+import { entryMap, book, chapterMap, entryNo } from '../data'
 import { BENEFIT_LABEL } from '../types'
 import { thresholdText } from '../components/common'
 
@@ -67,6 +67,13 @@ export function EntryPage({ id }: { id: string }) {
       <a className="back" href={`#/chapter/${e.chapterId}`}>
         <span aria-hidden="true">←</span> 第 {ch?.number} 章 {ch?.title}
       </a>
+
+      <div className="d-eyebrow">
+        <span className="d-no">{entryNo(e)}</span>
+        <a href={`#/chapter/${e.chapterId}`}>
+          第 {ch?.number} 章 · {ch?.title}
+        </a>
+      </div>
 
       <h1 className="d-title">{e.title}</h1>
       <p className="d-sum">{e.summary}</p>

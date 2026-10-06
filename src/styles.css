@@ -729,6 +729,35 @@ button {
   margin-bottom: 7px;
 }
 
+/* 章首规模提示：让读者进页前就知道要读多少 */
+.ch-lede {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+}
+
+.ch-lede-l {
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+
+.ch-lede-l b {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ch-lede-r {
+  margin-left: auto;
+  font-size: 12.5px;
+  color: var(--ink-4);
+}
+
 .ec-no {
   font-family: var(--font-mono);
   font-size: 11.5px;
@@ -778,6 +807,32 @@ button {
 }
 
 .back:hover {
+  color: var(--blue-600);
+}
+
+/* 条目详情页眉：编号 + 所属章节，等宽数字降权 */
+.d-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--ink-4);
+}
+
+.d-eyebrow .d-no {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--blue-700);
+  background: var(--blue-50);
+  border: 1px solid var(--blue-100);
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-variant-numeric: tabular-nums;
+}
+
+.d-eyebrow a:hover {
   color: var(--blue-600);
 }
 

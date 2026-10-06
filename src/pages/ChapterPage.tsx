@@ -68,6 +68,13 @@ export function ChapterPage({ id }: { id: string }) {
             {ch.intro}
           </div>
 
+          <div className="ch-lede">
+            <div className="ch-lede-l">
+              本章 <b>{list.length}</b> 条建议
+            </div>
+            <div className="ch-lede-r">每条都标了出处与证据等级，点开可看完整解释</div>
+          </div>
+
           <div style={{ marginBottom: 28 }}>
             {ch.sourceRepo && (
               <a className="srcbook" href={ch.sourceRepo} target="_blank" rel="noreferrer">
@@ -77,14 +84,9 @@ export function ChapterPage({ id }: { id: string }) {
             )}
           </div>
 
-          <div className="result-line">
-            <span className="rn">{list.length}</span>
-            <span>条建议</span>
-          </div>
-
           <div className="entry-list">
-            {list.map((e, i) => (
-              <EntryCard key={e.id} e={e} index={i} />
+            {list.map((e) => (
+              <EntryCard key={e.id} e={e} />
             ))}
           </div>
 

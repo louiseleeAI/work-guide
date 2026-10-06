@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { book, entries, chapters, countOfChapter } from '../data'
+import { book, entries, chapters, countOfChapter, entryNo } from '../data'
 import { Arrow, thresholdText } from '../components/common'
 import { calcSalary, type SalaryInput } from '../lib/calc'
 import { promptOfDay, loadDaily, streak } from '../lib/daily'
@@ -141,7 +141,7 @@ function SampleEntry() {
   return (
     <div className="sample">
       <div className="sample-head">
-        <div className="sample-eyebrow">示例条目 · {e.id}</div>
+        <div className="sample-eyebrow">示例条目 · {entryNo(e)}</div>
         <h3 className="sample-title">{e.title}</h3>
         <p className="sample-sum">{e.summary}</p>
       </div>

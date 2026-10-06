@@ -37,6 +37,23 @@ export function countOfChapter(chapterId: string): number {
   return entriesOfChapter(chapterId).length
 }
 
+/**
+ * 条目的可见编号，形如 `09-03`。
+ *
+ * 为什么不用条目 ID 当编号：ID 形如 `work-09-03`，是内部标识，不适合印在纸上、
+ * 也不适合口头引用（「第九章第三条」）。参考站的PDF 用的是 `02-01` 这种两段式，
+ * 章号-序号，两位数补零——辨识度高、可朗读、可交叉引用。
+ *
+ * 序号从条目在所属章节内的出现顺序推导，不写进数据文件：
+ * 这样调整条目顺序时编号自动重排，不会出现手写序号对不上的情况。
+ */
+export function entryNo(e: Entry): string {
+  const ch = chapterMap.get(e.chapterId)
+  if (!ch) return ''
+  const i = entriesOfChapter(e.chapterId).findIndex((x) => x.id === e.id) + 1
+  return `${ch.number}-${String(i).padStart(2, '0')}`
+}
+
 /** 上一章 / 下一章（按 index 排序） */
 export function neighborChapters(chapterId: string): { prev?: Chapter; next?: Chapter } {
   const sorted = [...chapters].sort((a, b) => a.index - b.index)

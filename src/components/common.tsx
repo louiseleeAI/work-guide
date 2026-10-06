@@ -1,6 +1,6 @@
 import type { Entry } from '../types'
 import { BENEFIT_LABEL } from '../types'
-import { chapterMap } from '../data'
+import { entryNo } from '../data'
 
 /** 阈值线的文字描述 */
 export function thresholdText(e: Entry): string {
@@ -73,15 +73,11 @@ export function ThresholdMark({ e }: { e: Entry }) {
   )
 }
 
-export function EntryCard({ e, index }: { e: Entry; index?: number }) {
-  const ch = chapterMap.get(e.chapterId)
-  const no = index !== undefined ? String(index + 1).padStart(2, '0') : ''
+export function EntryCard({ e }: { e: Entry; index?: number }) {
   return (
     <a className="entry-card" href={`#/entry/${e.id}`}>
       <div className="ec-head">
-        <span className="ec-no">
-          {ch ? `${ch.number}/${no}` : no}
-        </span>
+        <span className="ec-no">{entryNo(e)}</span>
         <span className="ec-title">{e.title}</span>
       </div>
       <p className="ec-sum">{e.summary}</p>
