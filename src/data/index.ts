@@ -8,6 +8,9 @@ import { ch06, entries as e06 } from './chapters/ch06'
 import { ch07, entries as e07 } from './chapters/ch07'
 import { ch08, entries as e08 } from './chapters/ch08'
 import { ch09, entries as e09 } from './chapters/ch09'
+import { ch10, entries as e10 } from './chapters/ch10'
+import { ch11, entries as e11 } from './chapters/ch11'
+import { ch13, entries as e13 } from './chapters/ch13'
 import { ch16, entries as e16 } from './chapters/ch16'
 
 export const DISCLAIMER =
@@ -15,7 +18,21 @@ export const DISCLAIMER =
   '且政策文件会不定期修订。涉及具体决策时，请以你所在地的人力资源和社会保障部门、公积金管理中心口径为准，' +
   '并在关键节点咨询执业律师。'
 
-export const chapters: Chapter[] = [ch01, ch02, ch03, ch04, ch05, ch06, ch07, ch08, ch09, ch16]
+export const chapters: Chapter[] = [
+  ch01,
+  ch02,
+  ch03,
+  ch04,
+  ch05,
+  ch06,
+  ch07,
+  ch08,
+  ch09,
+  ch10,
+  ch11,
+  ch13,
+  ch16,
+]
 
 export const entries: Entry[] = [
   ...e01,
@@ -27,6 +44,9 @@ export const entries: Entry[] = [
   ...e07,
   ...e08,
   ...e09,
+  ...e10,
+  ...e11,
+  ...e13,
   ...e16,
 ]
 
