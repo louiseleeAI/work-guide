@@ -5,6 +5,7 @@ import { ChapterPage } from './pages/ChapterPage'
 import { EntryPage } from './pages/EntryPage'
 import { Calculator } from './pages/Calculator'
 import { Daily } from './pages/Daily'
+import { AntiPage } from './pages/AntiPage'
 import { SiteFooter } from './components/SiteFooter'
 import { StaticPage } from './pages/StaticPage'
 
@@ -15,6 +16,7 @@ type Route =
   | { name: 'entry'; id: string }
   | { name: 'calc' }
   | { name: 'daily' }
+  | { name: 'anti' }
   | { name: 'static'; id: string }
 
 function parseHash(): Route {
@@ -24,6 +26,7 @@ function parseHash(): Route {
   if (head === 'explore') return { name: 'explore' }
   if (head === 'calc') return { name: 'calc' }
   if (head === 'daily') return { name: 'daily' }
+  if (head === 'anti') return { name: 'anti' }
   if (head === 'chapter' && arg) return { name: 'chapter', id: arg }
   if (head === 'entry' && arg) return { name: 'entry', id: arg }
   if (['about', 'contact', 'privacy', 'terms', 'changelog'].includes(head))
@@ -36,6 +39,7 @@ function Nav({ route }: { route: Route }) {
   const isExplore = route.name === 'explore' || route.name === 'chapter' || route.name === 'entry'
   const isCalc = route.name === 'calc'
   const isDaily = route.name === 'daily'
+  const isAnti = route.name === 'anti'
   return (
     <nav className="nav">
       <a href="#/" className={isHome ? 'on' : ''}>
@@ -49,6 +53,9 @@ function Nav({ route }: { route: Route }) {
       </a>
       <a href="#/calc" className={isCalc ? 'on' : ''}>
         测算
+      </a>
+      <a href="#/anti" className={isAnti ? 'on' : ''}>
+        反面清单
       </a>
     </nav>
   )
@@ -85,6 +92,7 @@ export default function App() {
         {route.name === 'entry' && <EntryPage id={route.id} />}
         {route.name === 'calc' && <Calculator />}
         {route.name === 'daily' && <Daily />}
+        {route.name === 'anti' && <AntiPage />}
         {route.name === 'static' && <StaticPage id={route.id} />}
       </main>
 

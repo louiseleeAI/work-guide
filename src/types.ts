@@ -77,6 +77,11 @@ export interface Entry {
   title: string
   /** 结论前置，一句话说完 */
   summary: string
+  /**
+   * 三步行动清单（可选）。动词开头、可直接执行，恰好 3 条；
+   * 没写的条目说明它本来就不需要「今天做点什么」。
+   */
+  steps?: string[]
   /** 正文段落 */
   body: string[]
   threshold: Threshold

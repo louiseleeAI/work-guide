@@ -107,6 +107,15 @@ for (const f of files) {
     // appliesTo
     if (!block.match(/appliesTo:\s*'[^']+'/)) err(num, `${id} 缺少 appliesTo`)
 
+    // steps —— 三步行动清单：有则必须恰好 3 条，缺了提醒
+    const stepsRaw = block.match(/steps:\s*\[([\s\S]*?)\]/)?.[1]
+    if (stepsRaw !== undefined) {
+      const n = (stepsRaw.match(/'(?:[^']*)'/g) || []).length
+      if (n !== 3) err(num, `${id} steps 必须恰好 3 条（当前 ${n} 条）`)
+    } else {
+      warn(num, `${id} 缺少 steps（3 步行动清单，建议补齐）`)
+    }
+
     // sources —— 可信度地基，必须有
     const srcCount = (block.match(/effectiveDate:/g) || []).length
     if (srcCount === 0) err(num, `${id} 缺少 sources（每条建议必须有出处，这是本项目的立身之本）`)

@@ -78,6 +78,17 @@ export function EntryPage({ id }: { id: string }) {
       <h1 className="d-title">{e.title}</h1>
       <p className="d-sum">{e.summary}</p>
 
+      {e.steps && e.steps.length > 0 && (
+        <div className="d-steps">
+          <div className="dsteps-label">三步清单 · 照着做</div>
+          <ol className="dsteps-list">
+            {e.steps.map((s, i) => (
+              <li key={i}>{s}</li>
+            ))}
+          </ol>
+        </div>
+      )}
+
       {e.threshold.unit !== 'none' && e.threshold.value ? (
         <div className="d-th">
           <div className="dth-label">
