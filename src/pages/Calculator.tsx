@@ -1,19 +1,57 @@
 import { useEffect, useMemo, useState } from 'react'
 import { entries } from '../data'
-import { calcSalary, SOCIAL_TIERS, type SalaryInput } from '../lib/calc'
+import {
+  calcSalary,
+  DEFAULT_INSURANCE_RATE,
+  FUND_TIERS,
+  type SalaryInput,
+} from '../lib/calc'
+
+const PRESETS: { label: string; input: SalaryInput }[] = [
+  {
+    label: '月薪 12k · 10 小时',
+    input: {
+      grossMonthly: 12000,
+      insuranceRate: DEFAULT_INSURANCE_RATE,
+      fundRate: 0.07,
+      baseCeiling: 0,
+      dailyHours: 10,
+      workDays: 24,
+      specialDeduction: 1000,
+    },
+  },
+  {
+    label: '月薪 20k · 11 小时',
+    input: {
+      grossMonthly: 20000,
+      insuranceRate: DEFAULT_INSURANCE_RATE,
+      fundRate: 0.12,
+      baseCeiling: 0,
+      dailyHours: 11,
+      workDays: 25,
+      specialDeduction: 2000,
+    },
+  },
+  {
+    label: '月薪 35k · 12 小时',
+    input: {
+      grossMonthly: 35000,
+      insuranceRate: DEFAULT_INSURANCE_RATE,
+      fundRate: 0.12,
+      baseCeiling: 35000,
+      dailyHours: 12,
+      workDays: 26,
+      specialDeduction: 3000,
+    },
+  },
+]
 
 export function Calculator() {
   useEffect(() => {
     document.title = '到手测算与真实时薪 · 高性价比打工指南'
   }, [])
 
-  const [salary, setSalary] = useState<SalaryInput>({
-    grossMonthly: 25000,
-    socialRate: 0.265,
-    dailyHours: 11,
-    payDays: 21.75,
-    monthlyDeduction: 2000,
-  })
+  const [salary, setSalary] = useState<SalaryInput>(PRESETS[1].input)
   const [otHours, setOtHours] = useState(20)
   const [otPremium, setOtPremium] = useState(200)
 
@@ -21,14 +59,21 @@ export function Calculator() {
 
   const verdicts = useMemo(() => {
     const withT = entries
-      .filter((e) => e.threshold.unit === 'hourly' && e.threshold.value > 0)
+      .filter(
+        (e) => e.threshold.unit === 'hourly' && (e.threshold.value ?? 0) > 0,
+      )
       .map((e) => ({
         e,
-        ok: r.realHourly >= e.threshold.value,
-        gap: e.threshold.value - r.realHourly,
-        over: r.realHourly - e.threshold.value,
+        thr: e.threshold.value as number,
       }))
-      .sort((a, b) => b.e.threshold.value - a.e.threshold.value)
+      .map(({ e, thr }) => ({
+        e,
+        thr,
+        ok: r.realHourly >= thr,
+        gap: thr - r.realHourly,
+        over: r.realHourly - thr,
+      }))
+      .sort((a, b) => b.thr - a.thr)
     return { yes: withT.filter((x) => x.ok), no: withT.filter((x) => !x.ok) }
   }, [r.realHourly])
 
@@ -52,48 +97,15 @@ export function Calculator() {
       <div className="calc-grid">
         <div>
           <div className="presets">
-            <button
-              className="preset"
-              onClick={() =>
-                setSalary({
-                  grossMonthly: 12000,
-                  socialRate: 0.24,
-                  dailyHours: 10,
-                  payDays: 21.75,
-                  monthlyDeduction: 1000,
-                })
-              }
-            >
-              月薪 12k · 10 小时
-            </button>
-            <button
-              className="preset"
-              onClick={() =>
-                setSalary({
-                  grossMonthly: 20000,
-                  socialRate: 0.265,
-                  dailyHours: 11,
-                  payDays: 21.75,
-                  monthlyDeduction: 2000,
-                })
-              }
-            >
-              月薪 20k · 11 小时
-            </button>
-            <button
-              className="preset"
-              onClick={() =>
-                setSalary({
-                  grossMonthly: 35000,
-                  socialRate: 0.28,
-                  dailyHours: 12,
-                  payDays: 21.75,
-                  monthlyDeduction: 3000,
-                })
-              }
-            >
-              月薪 35k · 12 小时
-            </button>
+            {PRESETS.map((p) => (
+              <button
+                key={p.label}
+                className="preset"
+                onClick={() => setSalary(p.input)}
+              >
+                {p.label}
+              </button>
+            ))}
           </div>
 
           <div className="field">
@@ -107,29 +119,58 @@ export function Calculator() {
           </div>
 
           <div className="field">
-            <label>五险一金个人缴纳比例</label>
+            <label>五险个人缴纳比例（养老 + 医疗 + 失业）</label>
             <select
-              value={salary.socialRate}
-              onChange={(e) => setSalary({ ...salary, socialRate: Number(e.target.value) })}
+              value={salary.insuranceRate}
+              onChange={(e) => setSalary({ ...salary, insuranceRate: Number(e.target.value) })}
             >
-              {SOCIAL_TIERS.map((t) => (
-                <option key={t.id} value={t.rate}>
-                  {t.label} —— {Math.round(t.rate * 1000) / 10}%
-                </option>
-              ))}
+              <option value={0.1}>约 10%（医疗按 1.5% 的地区）</option>
+              <option value={0.105}>约 10.5%（多数城市：8% + 2% + 0.5%）</option>
+              <option value={0.108}>约 10.8%（失业按 0.8% 的地区，如部分广东口径）</option>
             </select>
             <div className="fhint">
-              全国不是统一比例，各省各年度会调整。这里按档位取整，精确值请查参保地人社部门公告。
+              养老全国统一 8%，医疗 1.5%–2%、失业 0.2%–0.8% 各地略有差异。精确值查参保地公告。
             </div>
           </div>
 
           <div className="field">
-            <label>专项附加扣除（月减税额，元）</label>
+            <label>公积金个人缴存比例</label>
+            <select
+              value={salary.fundRate}
+              onChange={(e) => setSalary({ ...salary, fundRate: Number(e.target.value) })}
+            >
+              {FUND_TIERS.map((t) => (
+                <option key={t.id} value={t.rate}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+            <div className="fhint">
+              5%–12% 由单位在法定区间内自定，同一份 offer 换家公司可能差一倍。
+              单位同比例缴存，两部分都进你的账户。
+            </div>
+          </div>
+
+          <div className="field">
+            <label>缴费基数上限（元/月，0 表示不设限）</label>
             <input
               type="number"
-              value={salary.monthlyDeduction}
+              value={salary.baseCeiling}
+              onChange={(e) => setSalary({ ...salary, baseCeiling: Number(e.target.value) || 0 })}
+            />
+            <div className="fhint">
+              一般为当地上年度社平工资的 3 倍左右。月薪超过上限的部分不缴社保公积金。
+              不确定就填 0，结果偏保守。
+            </div>
+          </div>
+
+          <div className="field">
+            <label>专项附加扣除（月扣除额，元）</label>
+            <input
+              type="number"
+              value={salary.specialDeduction}
               onChange={(e) =>
-                setSalary({ ...salary, monthlyDeduction: Number(e.target.value) || 0 })
+                setSalary({ ...salary, specialDeduction: Number(e.target.value) || 0 })
               }
             />
             <div className="fhint">
@@ -138,7 +179,7 @@ export function Calculator() {
           </div>
 
           <div className="field">
-            <label>每天实际工作小时数（含加班）</label>
+            <label>每天实际工作小时数（在岗口径，含加班）</label>
             <input
               type="number"
               step="0.5"
@@ -146,14 +187,28 @@ export function Calculator() {
               onChange={(e) => setSalary({ ...salary, dailyHours: Number(e.target.value) || 0 })}
             />
             <div className="fhint">
-              标准是 8 小时。这个数字越高，真实时薪越低，这是很多人没意识到的部分。
+              标准是 8 小时。按在岗时间算，午休不计工作就减掉。
+            </div>
+          </div>
+
+          <div className="field">
+            <label>每月实际出勤天数</label>
+            <input
+              type="number"
+              step="0.5"
+              value={salary.workDays}
+              onChange={(e) => setSalary({ ...salary, workDays: Number(e.target.value) || 0 })}
+            />
+            <div className="fhint">
+              标准工时约 21–22 天；大小周或每周 6 天约 25–26 天。
+              真实时薪的分母是这个数 × 日工时，不是法定的 21.75 个计薪天。
             </div>
           </div>
         </div>
 
         <div className="out">
           <div className="out-top">
-            <div className="ol">税后真实时薪</div>
+            <div className="ol">真实时薪（含公积金）</div>
             <div className="ov">
               {r.realHourly.toFixed(0)}
               <small>元/小时</small>
@@ -161,28 +216,38 @@ export function Calculator() {
             <div className="osub">下方所有阈值判定的分母</div>
           </div>
           <div className="out-row">
-            <span className="orl">到手月薪</span>
+            <span className="orl">现金到手月薪</span>
             <span className="orv">{Math.round(r.netMonthly).toLocaleString('zh-CN')}</span>
           </div>
           <div className="out-row">
-            <span className="orl">每月社保个人缴纳</span>
-            <span className="orv">{Math.round(r.socialMonthly).toLocaleString('zh-CN')}</span>
+            <span className="orl">公积金个人缴存</span>
+            <span className="orv">{Math.round(r.fundMonthly).toLocaleString('zh-CN')}</span>
           </div>
           <div className="out-row">
-            <span className="orl">个税计税基数</span>
-            <span className="orv">{Math.round(r.taxableMonthly).toLocaleString('zh-CN')}</span>
+            <span className="orl">全口径月薪（现金 + 公积金）</span>
+            <span className="orv">{Math.round(r.disposableMonthly).toLocaleString('zh-CN')}</span>
+          </div>
+          <div className="out-row">
+            <span className="orl">缴费基数（截断后）</span>
+            <span className="orv">{Math.round(r.contributionBase).toLocaleString('zh-CN')}</span>
           </div>
           <div className="out-row">
             <span className="orl">全年个税</span>
             <span className="orv">{Math.round(r.annualTax).toLocaleString('zh-CN')}</span>
           </div>
           <div className="out-row">
-            <span className="orl">每周工时</span>
-            <span className="orv">{r.weeklyHours.toFixed(0)} 小时</span>
+            <span className="orl">纯现金时薪</span>
+            <span className="orv">{r.cashHourly.toFixed(0)} 元</span>
+          </div>
+          <div className="out-row">
+            <span className="orl">月实际工时 / 折算每周</span>
+            <span className="orv">
+              {r.monthlyHours.toFixed(0)} h · {r.weeklyHours.toFixed(0)} h/周
+            </span>
           </div>
           <div className="out-foot">
-            公积金个人账户约 {Math.round(r.fundMonthly).toLocaleString('zh-CN')} 元/月
-            （按上限 12% 估算），不进「到手」但属于你的钱。
+            与私活等现金报价比，用「纯现金时薪」；与 offer 总包、全站阈值比，用上面的「真实时薪」。
+            个税按年度汇算口径折算月均，实际工资单逐月会跳动。
           </div>
         </div>
       </div>
@@ -259,7 +324,8 @@ export function Calculator() {
               onChange={(e) => setOtPremium(Number(e.target.value) || 0)}
             />
             <div className="fhint">
-              公司按工作日 150% 发时，基数通常是正常时薪的 1.5 倍。填你实际拿到的数。
+              基数是劳动合同约定的正常工作时间月工资 ÷ 21.75 ÷ 8。
+              公司只按基本工资算基数是常见的少付手法，各地裁审口径有差异。
             </div>
           </div>
 

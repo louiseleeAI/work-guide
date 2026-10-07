@@ -188,16 +188,18 @@ function DailyTeaser() {
 function LiveHourly() {
   const [s, setS] = useState<SalaryInput>({
     grossMonthly: 25000,
-    socialRate: 0.265,
+    insuranceRate: 0.105,
+    fundRate: 0.12,
+    baseCeiling: 0,
     dailyHours: 11,
-    payDays: 21.75,
-    monthlyDeduction: 2000,
+    workDays: 25,
+    specialDeduction: 2000,
   })
   const r = calcSalary(s)
 
   return (
     <div className="hero-card">
-      <div className="hc-label">你的税后真实时薪</div>
+      <div className="hc-label">你的真实时薪（含公积金）</div>
       <div className="hc-val">
         {r.realHourly.toFixed(0)}
         <small>元/小时</small>
@@ -216,8 +218,8 @@ function LiveHourly() {
             style={{ padding: '7px 10px', fontSize: 14 }}
           />
         </div>
-        <div className="field" style={{ marginBottom: 0 }}>
-          <label style={{ fontSize: 12.5, marginBottom: 5 }}>日均工时（含加班）</label>
+        <div className="field" style={{ marginBottom: 12 }}>
+          <label style={{ fontSize: 12.5, marginBottom: 5 }}>每天实际工作小时（在岗口径）</label>
           <input
             type="number"
             step="0.5"
@@ -226,15 +228,29 @@ function LiveHourly() {
             style={{ padding: '7px 10px', fontSize: 14 }}
           />
         </div>
+        <div className="field" style={{ marginBottom: 0 }}>
+          <label style={{ fontSize: 12.5, marginBottom: 5 }}>每月实际出勤天数</label>
+          <input
+            type="number"
+            step="0.5"
+            value={s.workDays}
+            onChange={(e) => setS({ ...s, workDays: Number(e.target.value) || 0 })}
+            style={{ padding: '7px 10px', fontSize: 14 }}
+          />
+        </div>
       </div>
 
       <div className="hc-row" style={{ marginTop: 14 }}>
-        <span>到手月薪</span>
+        <span>现金到手月薪</span>
         <span style={{ fontWeight: 600 }}>{Math.round(r.netMonthly).toLocaleString('zh-CN')}</span>
       </div>
       <div className="hc-row">
-        <span>每周工时</span>
-        <span style={{ fontWeight: 600 }}>{r.weeklyHours.toFixed(0)} 小时</span>
+        <span>公积金个人缴存</span>
+        <span style={{ fontWeight: 600 }}>{Math.round(r.fundMonthly).toLocaleString('zh-CN')}</span>
+      </div>
+      <div className="hc-row">
+        <span>月实际工时</span>
+        <span style={{ fontWeight: 600 }}>{r.monthlyHours.toFixed(0)} 小时</span>
       </div>
     </div>
   )

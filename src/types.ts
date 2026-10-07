@@ -23,16 +23,35 @@ export const BENEFIT_LABEL: Record<BenefitKind, string> = {
   bargain: '议价权',
 }
 
-/** 阈值线：这是本项目区别于参考站的核心字段 */
+/**
+ * 阈值线单位。
+ *
+ * none 表示本条不适用阈值判断——不是偷懒，而是有些内容本来就不是
+ * 「投入时间换收益」的决策：法条要件（竞业适用人群）、金额主张（补偿标准）
+ * 没有时薪框架的位置。硬塞时薪只会产出「时薪 0 元」这种 UI 笑话。
+ * 权利窗口类内容用 years（试用期上限对应合同期限、仲裁时效对应离职年限）。
+ */
+export type ThresholdUnit = 'hourly' | 'years' | 'total' | 'none'
+
+/**
+ * 阈值线：这是本项目区别于参考站的核心字段。
+ *
+ * 注意：不是每条都有阈值。unit 为 none 的条目必须写清 below——
+ * 说明为什么这条不需要阈值，以及无条件成立的行动是什么。
+ */
 export interface Threshold {
-  /** 计量单位 */
-  unit: 'hourly' | 'years' | 'total'
-  /** 阈值数值 */
-  value: number
+  unit: ThresholdUnit
+  /** 阈值数值。unit 为 none 时省略 */
+  value?: number
   /** 该阈值的含义说明，如「税后时薪」 */
   basis: string
-  /** 低于阈值时会发生什么 */
+  /** 低于阈值时的行动，或 none 时的无条件行动 */
   below: string
+  /**
+   * 推导口径：这个数字怎么来的。
+   * 没有推导的阈值就是拍脑袋，读者有权追问；写不出来就别设值。
+   */
+  derivation?: string
 }
 
 export interface Source {

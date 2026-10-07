@@ -5,10 +5,10 @@ import { entryNo } from '../data'
 /** 阈值线的文字描述 */
 export function thresholdText(e: Entry): string {
   const t = e.threshold
-  if (t.value === 0) return '不设时薪阈值'
+  if (t.unit === 'none') return '不设阈值线'
   if (t.unit === 'hourly') return `时薪 ≥ ${t.value}`
-  if (t.unit === 'years') return `工龄 ≥ ${t.value} 年`
-  return `年包 ≥ ${t.value}`
+  if (t.unit === 'years') return `年限 ≥ ${t.value} 年`
+  return `总包 ≥ ${t.value}`
 }
 
 function ThresholdIcon() {
@@ -64,11 +64,13 @@ export function EvidencePill({ level }: { level: 'A' | 'B' | 'C' }) {
 }
 
 export function ThresholdMark({ e }: { e: Entry }) {
+  const t = e.threshold
+  if (t.unit === 'none') return null
   return (
     <span className="th-mark">
       <ThresholdIcon />
       {thresholdText(e)}
-      {e.threshold.unit === 'hourly' && e.threshold.value > 0 ? ' 元/时' : ''}
+      {t.unit === 'hourly' && t.value ? ' 元/时' : ''}
     </span>
   )
 }

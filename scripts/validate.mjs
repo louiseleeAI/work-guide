@@ -12,7 +12,7 @@ const CHAPTERS_DIR = join(__dirname, '..', 'src', 'data', 'chapters')
 const VALID_EVIDENCE = ['A', 'B', 'C']
 const VALID_COST = ['零', '低', '中', '高']
 const VALID_LEVEL = ['大', '中', '小']
-const VALID_UNIT = ['hourly', 'years', 'total']
+const VALID_UNIT = ['hourly', 'years', 'total', 'none']
 
 let errors = 0
 let warnings = 0
@@ -68,11 +68,17 @@ for (const f of files) {
     const thUnit = block.match(/threshold:\s*\{[\s\S]*?unit:\s*'([^']+)'/)?.[1]
     const thBasis = block.match(/threshold:\s*\{[\s\S]*?basis:\s*'([^']+)'/)?.[1]
     const thBelow = block.match(/threshold:\s*\{[\s\S]*?below:\s*'([\s\S]*?)',\n    \}/)?.[1]
-    if (thValue === undefined) err(num, `${id} 缺少 threshold.value（这是核心字段，不能省）`)
     if (!thUnit || !VALID_UNIT.includes(thUnit)) err(num, `${id} threshold.unit 非法：${thUnit}`)
+    // unit 为 none 时不设数值（法条要件、计算规则类条目没有时薪框架的位置）；其余单位必须有数值
+    if (thUnit !== 'none' && thValue === undefined) {
+      err(num, `${id} threshold.value 缺失（unit=${thUnit} 必须有数值）`)
+    }
+    if (thUnit === 'none' && thValue !== undefined) {
+      warn(num, `${id} unit 为 none 却带了 value，确认是否写错`)
+    }
     if (!thBasis) err(num, `${id} 缺少 threshold.basis（阈值口径要说清楚）`)
     if (!thBelow || thBelow.length < 20) {
-      err(num, `${id} threshold.below 过短，必须说明「低于阈值会怎样」`)
+      err(num, `${id} threshold.below 过短，必须说明「低于阈值/无条件时怎么办」`)
     }
     if (thUnit === 'hourly' && Number(thValue) === 0) {
       warn(num, `${id} 时薪阈值为 0，确认是否有意为之`)

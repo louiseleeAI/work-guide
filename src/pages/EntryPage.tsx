@@ -78,7 +78,7 @@ export function EntryPage({ id }: { id: string }) {
       <h1 className="d-title">{e.title}</h1>
       <p className="d-sum">{e.summary}</p>
 
-      {e.threshold.value > 0 ? (
+      {e.threshold.unit !== 'none' && e.threshold.value ? (
         <div className="d-th">
           <div className="dth-label">
             <ThresholdIcon />
@@ -89,12 +89,15 @@ export function EntryPage({ id }: { id: string }) {
               ? `你的税后时薪 ≥ ${e.threshold.value} 元 / 小时，这一条才值得投入`
               : thresholdText(e)}
           </div>
+          {e.threshold.derivation && (
+            <div className="dth-basis">推导：{e.threshold.derivation}</div>
+          )}
           <div className="dth-below">{e.threshold.below}</div>
           <div className="dth-basis">口径：{e.threshold.basis}</div>
         </div>
       ) : (
         <div className="d-noth">
-          <b>本条不设时薪阈值。</b> {e.threshold.below}
+          <b>本条不设阈值线。</b> {e.threshold.below}
         </div>
       )}
 
