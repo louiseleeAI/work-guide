@@ -66,10 +66,70 @@ function DownArrow() {
   )
 }
 
-/** 登录弹窗：一比一复刻参考站的「公众号验证码登录」，后端接入前标注说明 */
+type LoginState =
+  | { phase: 'starting' }
+  | { phase: 'server'; code: string; status: 'pending' | 'ok' }
+  | { phase: 'local'; code: string }
+
+/** 登录弹窗：一比一复刻参考站的「公众号验证码登录」。
+ *  服务可用时走 /api/login/start + 轮询 check；不可用（本地预览/未部署）时降级为本地码。 */
 function LoginModal({ onClose, onSkip }: { onClose: () => void; onSkip: () => void }) {
-  const [code] = useState(() => String(Math.floor(100000 + Math.random() * 900000)))
+  const [state, setState] = useState<LoginState>({ phase: 'starting' })
   const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    let alive = true
+    let timer: number | undefined
+
+    async function start() {
+      try {
+        const r = await fetch('/api/login/start', { method: 'POST' })
+        if (!r.ok) throw new Error('unavailable')
+        const j = (await r.json()) as { ok: boolean; code?: string }
+        if (!j.ok || !j.code) throw new Error('unavailable')
+        if (!alive) return
+        setState({ phase: 'server', code: j.code, status: 'pending' })
+        poll(j.code)
+      } catch {
+        if (!alive) return
+        const code = String(Math.floor(100000 + Math.random() * 900000))
+        setState({ phase: 'local', code })
+      }
+    }
+
+    async function poll(code: string) {
+      try {
+        const r = await fetch(`/api/login/check?code=${code}`)
+        const j = (await r.json()) as { status: string; token?: string }
+        if (!alive) return
+        if (j.status === 'ok' && j.token) {
+          try {
+            localStorage.setItem('wg_token', j.token)
+          } catch {
+            /* ignore */
+          }
+          setState((s) => (s.phase === 'server' ? { ...s, status: 'ok' } : s))
+          return
+        }
+        if (j.status === 'pending') {
+          timer = window.setTimeout(() => poll(code), 2500)
+          return
+        }
+      } catch {
+        // 网络抖动继续轮询
+        timer = window.setTimeout(() => poll(code), 4000)
+      }
+    }
+
+    start()
+    return () => {
+      alive = false
+      if (timer) clearTimeout(timer)
+    }
+  }, [])
+
+  const code = state.phase === 'starting' ? '……' : state.code
+  const verified = state.phase === 'server' && state.status === 'ok'
 
   return (
     <div className="dl-modal-mask" onClick={onClose}>
@@ -83,8 +143,10 @@ function LoginModal({ onClose, onSkip }: { onClose: () => void; onSkip: () => vo
           </div>
           <div>
             <div className="dlm-eyebrow">免费下载</div>
-            <h3 className="dlm-title">登录后继续下载</h3>
-            <p className="dlm-sub">完成登录后返回本页，即可选择 PDF、Word 或 Markdown 下载。</p>
+            <h3 className="dlm-title">{verified ? '验证成功' : '登录后继续下载'}</h3>
+            <p className="dlm-sub">
+              {verified ? '已解锁，正在返回下载…' : '完成登录后返回本页，即可选择 PDF、Word 或 Markdown 下载。'}
+            </p>
           </div>
           <button className="dlm-close" onClick={onClose} aria-label="关闭">
             ×
@@ -109,7 +171,7 @@ function LoginModal({ onClose, onSkip }: { onClose: () => void; onSkip: () => vo
             <div className="dlm-code-card">
               <div className="dlm-code-label">在公众号发送这 6 位登录码</div>
               <div className="dlm-code-row">
-                <span className="dlm-code">{code}</span>
+                <span className={`dlm-code${verified ? ' dlm-code-ok' : ''}`}>{code}</span>
                 <button
                   className="dlm-copy"
                   onClick={() => {
@@ -121,16 +183,28 @@ function LoginModal({ onClose, onSkip }: { onClose: () => void; onSkip: () => vo
                 </button>
               </div>
               <div className="dlm-status">
-                <span className="dlm-status-dot" />
-                等待你在微信中发送…
+                <span className={`dlm-status-dot${verified ? ' ok' : ''}`} />
+                {state.phase === 'starting' && '正在生成登录码…'}
+                {state.phase === 'local' && '登录服务未连接（本地预览或未部署）——当前阶段免登录直接下载'}
+                {state.phase === 'server' && state.status === 'pending' && '等待你在微信中发送…'}
+                {verified && '验证成功，登录已生效（30 天有效）'}
               </div>
             </div>
-            <div className="dlm-beta-note">
-              登录服务正在接入公众号后台，当前阶段所有格式<b>免登录直接下载</b>。
-            </div>
-            <button className="dlm-skip" onClick={onSkip}>
-              跳过登录，直接下载 →
-            </button>
+            {state.phase === 'local' && (
+              <div className="dlm-beta-note">
+                登录服务正在接入公众号后台，当前阶段所有格式<b>免登录直接下载</b>。
+              </div>
+            )}
+            {verified && (
+              <div className="dlm-beta-note">
+                <b>已验证。</b>关闭弹窗后点击任意格式即可下载。关注公众号可第一时间收到章节更新。
+              </div>
+            )}
+            {!verified && (
+              <button className="dlm-skip" onClick={onSkip}>
+                跳过登录，直接下载 →
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -3145,3 +3145,12 @@ button {
     padding: 0;
   }
 }
+
+.dlm-code-ok {
+  color: #1f8f4e;
+}
+
+.dlm-status-dot.ok {
+  background: #1f8f4e;
+  animation: none;
+}
