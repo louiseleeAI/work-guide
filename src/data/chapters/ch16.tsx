@@ -413,7 +413,7 @@ export const entries: Entry[] = [
       },
       {
         title: '《2025 年度人力资源和社会保障事业发展统计公报》',
-        effectiveDate: '2026-07',
+        effectiveDate: '2026-07-16',
         url: 'https://www.mohrss.gov.cn/SYrlzyhshbzb/zwgk/szrs/tjgb/202607/W020260716567491153024.pdf',
       },
     ],

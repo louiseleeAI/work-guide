@@ -228,7 +228,7 @@ export const entries: Entry[] = [
       {
         title: '《中华人民共和国个人所得税法实施条例》第六条',
         docNumber: '国务院令第 707 号',
-        effectiveDate: '2018-12-18',
+        effectiveDate: '2019-01-01',
         url: 'https://www.gov.cn/zhengce/content/2018-12/22/content_5351177.htm',
       },
     ],
