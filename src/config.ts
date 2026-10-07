@@ -29,4 +29,4 @@ export const SHOW_BUILD_CREDIT = true
 export const SITE_NAME = '高性价比打工指南'
 
 /** 内容更新日期 */
-export const UPDATED_AT = '2026-10-06'
+export const UPDATED_AT = '2026-10-07'

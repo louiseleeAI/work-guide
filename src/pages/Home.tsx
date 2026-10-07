@@ -85,7 +85,8 @@ export function Home() {
             <div className="pt">再算阈值</div>
             <div className="pd">
               打工决策高度依赖收入水平。同一个动作，对月薪 4k 的人是浪费，
-              对 4w 的人是救命。所以每条建议先回答「你的时薪要到多少」。
+              对 4w 的人是救命。能算出临界时薪的建议，阈值和推导过程直接给你；
+              算不出的，直说为什么不用算。
             </div>
           </div>
           <div className="pcard">
@@ -127,9 +128,9 @@ export function Home() {
         </div>
 
         <p style={{ fontSize: 13.5, color: 'var(--ink-4)', marginTop: 20, lineHeight: 1.8 }}>
-          当前为内容样板阶段，已完成三个章节：offer 总包拆解、加班的真实时薪、合同的坑。
-          这三章覆盖了三种收益口径，法条密度最高，用来检验框架是否站得住。
-          完整骨架共 28 篇 + 反面清单。
+          已完成 8 章：进场全部 5 章（简历投递、面试、offer 总包、谈薪、背调入职），
+          在职的通勤与加班，风险的合同的坑。覆盖三种收益口径，全部算例可验算。
+          完整骨架共 28 篇 + 反面清单，其余章节按同一标准推进中。
         </p>
       </div>
     </>
@@ -147,7 +148,11 @@ function SampleEntry() {
       </div>
       <div className="sample-th">
         <div className="stl">阈值线</div>
-        <div className="stv">{thresholdText(e)} 元/小时，这条建议才值得投入</div>
+        <div className="stv">
+          {e.threshold.unit === 'none'
+            ? `本条不设时薪阈值——${e.threshold.basis}`
+            : `${thresholdText(e)} 元/小时，这条建议才值得投入`}
+        </div>
         <div className="stb">{e.threshold.below}</div>
       </div>
     </div>
