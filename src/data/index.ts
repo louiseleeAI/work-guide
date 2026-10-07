@@ -15,6 +15,12 @@ import { ch13, entries as e13 } from './chapters/ch13'
 import { ch14, entries as e14 } from './chapters/ch14'
 import { ch15, entries as e15 } from './chapters/ch15'
 import { ch16, entries as e16 } from './chapters/ch16'
+import { ch17, entries as e17 } from './chapters/ch17'
+import { ch18, entries as e18 } from './chapters/ch18'
+import { ch19, entries as e19 } from './chapters/ch19'
+import { ch20, entries as e20 } from './chapters/ch20'
+import { ch21, entries as e21 } from './chapters/ch21'
+import { ch22, entries as e22 } from './chapters/ch22'
 
 export const DISCLAIMER =
   '本站内容用于信息参考，不构成法律意见。劳动仲裁时效、竞业限制补偿、社保与公积金的具体口径存在明显的地区差异，' +
@@ -38,6 +44,12 @@ export const chapters: Chapter[] = [
   ch14,
   ch15,
   ch16,
+  ch17,
+  ch18,
+  ch19,
+  ch20,
+  ch21,
+  ch22,
 ]
 
 export const entries: Entry[] = [
@@ -57,6 +69,12 @@ export const entries: Entry[] = [
   ...e14,
   ...e15,
   ...e16,
+  ...e17,
+  ...e18,
+  ...e19,
+  ...e20,
+  ...e21,
+  ...e22,
 ]
 
 export const book: BookMeta = {
