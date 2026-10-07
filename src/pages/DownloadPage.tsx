@@ -213,7 +213,9 @@ function LoginModal({ onClose, onSkip }: { onClose: () => void; onSkip: () => vo
 }
 
 export function DownloadPage() {
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(
+    () => typeof window !== 'undefined' && window.location.hash.includes('modal=1')
+  )
   const [pending, setPending] = useState<FormatId | null>(null)
   const [toast, setToast] = useState<string | null>(null)
 
