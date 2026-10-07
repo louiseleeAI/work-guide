@@ -6,6 +6,8 @@ import { EntryPage } from './pages/EntryPage'
 import { Calculator } from './pages/Calculator'
 import { Daily } from './pages/Daily'
 import { AntiPage } from './pages/AntiPage'
+import { DownloadPage } from './pages/DownloadPage'
+import { PrintPage } from './pages/PrintPage'
 import { SiteFooter } from './components/SiteFooter'
 import { StaticPage } from './pages/StaticPage'
 
@@ -17,6 +19,8 @@ type Route =
   | { name: 'calc' }
   | { name: 'daily' }
   | { name: 'anti' }
+  | { name: 'download' }
+  | { name: 'print'; mode: 'full' | 'simple' }
   | { name: 'static'; id: string }
 
 function parseHash(): Route {
@@ -27,6 +31,8 @@ function parseHash(): Route {
   if (head === 'calc') return { name: 'calc' }
   if (head === 'daily') return { name: 'daily' }
   if (head === 'anti') return { name: 'anti' }
+  if (head === 'download') return { name: 'download' }
+  if (head === 'print') return { name: 'print', mode: arg === 'simple' ? 'simple' : 'full' }
   if (head === 'chapter' && arg) return { name: 'chapter', id: arg }
   if (head === 'entry' && arg) return { name: 'entry', id: arg }
   if (['about', 'contact', 'privacy', 'terms', 'changelog'].includes(head))
@@ -40,6 +46,7 @@ function Nav({ route }: { route: Route }) {
   const isCalc = route.name === 'calc'
   const isDaily = route.name === 'daily'
   const isAnti = route.name === 'anti'
+  const isDownload = route.name === 'download'
   return (
     <nav className="nav">
       <a href="#/" className={isHome ? 'on' : ''}>
@@ -56,6 +63,9 @@ function Nav({ route }: { route: Route }) {
       </a>
       <a href="#/anti" className={isAnti ? 'on' : ''}>
         反面清单
+      </a>
+      <a href="#/download" className={isDownload ? 'on' : ''}>
+        下载
       </a>
     </nav>
   )
@@ -93,6 +103,8 @@ export default function App() {
         {route.name === 'calc' && <Calculator />}
         {route.name === 'daily' && <Daily />}
         {route.name === 'anti' && <AntiPage />}
+        {route.name === 'download' && <DownloadPage />}
+        {route.name === 'print' && <PrintPage mode={route.mode} />}
         {route.name === 'static' && <StaticPage id={route.id} />}
       </main>
 
