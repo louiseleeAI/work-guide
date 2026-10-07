@@ -10,7 +10,10 @@ import { ch08, entries as e08 } from './chapters/ch08'
 import { ch09, entries as e09 } from './chapters/ch09'
 import { ch10, entries as e10 } from './chapters/ch10'
 import { ch11, entries as e11 } from './chapters/ch11'
+import { ch12, entries as e12 } from './chapters/ch12'
 import { ch13, entries as e13 } from './chapters/ch13'
+import { ch14, entries as e14 } from './chapters/ch14'
+import { ch15, entries as e15 } from './chapters/ch15'
 import { ch16, entries as e16 } from './chapters/ch16'
 
 export const DISCLAIMER =
@@ -30,7 +33,10 @@ export const chapters: Chapter[] = [
   ch09,
   ch10,
   ch11,
+  ch12,
   ch13,
+  ch14,
+  ch15,
   ch16,
 ]
 
@@ -46,7 +52,10 @@ export const entries: Entry[] = [
   ...e09,
   ...e10,
   ...e11,
+  ...e12,
   ...e13,
+  ...e14,
+  ...e15,
   ...e16,
 ]
 
