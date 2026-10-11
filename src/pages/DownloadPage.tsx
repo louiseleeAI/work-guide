@@ -72,8 +72,17 @@ type LoginState =
   | { phase: 'local'; code: string }
 
 /** 登录弹窗：一比一复刻参考站的「公众号验证码登录」。
- *  服务可用时走 /api/login/start + 轮询 check；不可用（本地预览/未部署）时降级为本地码。 */
-function LoginModal({ onClose, onSkip }: { onClose: () => void; onSkip: () => void }) {
+ *  服务可用时走 /api/login/start + 轮询 check；不可用（本地预览/未部署）时降级为本地码。
+ *  onVerified：验证成功时回调父级（父级负责放行下载并关弹窗）。 */
+function LoginModal({
+  onClose,
+  onSkip,
+  onVerified,
+}: {
+  onClose: () => void
+  onSkip: () => void
+  onVerified: () => void
+}) {
   const [state, setState] = useState<LoginState>({ phase: 'starting' })
   const [copied, setCopied] = useState(false)
 
@@ -109,6 +118,7 @@ function LoginModal({ onClose, onSkip }: { onClose: () => void; onSkip: () => vo
             /* ignore */
           }
           setState((s) => (s.phase === 'server' ? { ...s, status: 'ok' } : s))
+          onVerified()
           return
         }
         if (j.status === 'pending') {
@@ -197,7 +207,7 @@ function LoginModal({ onClose, onSkip }: { onClose: () => void; onSkip: () => vo
             )}
             {verified && (
               <div className="dlm-beta-note">
-                <b>已验证。</b>关闭弹窗后点击任意格式即可下载。关注公众号可第一时间收到章节更新。
+                <b>已验证。</b>文件马上自动开始下载；若浏览器拦截，请允许「多个文件下载」或在弹窗关闭后重试。关注公众号可第一时间收到章节更新。
               </div>
             )}
             {!verified && (
@@ -216,6 +226,9 @@ export function DownloadPage() {
   const [modal, setModal] = useState(
     () => typeof window !== 'undefined' && window.location.hash.includes('modal=1')
   )
+  const [authed, setAuthed] = useState(
+    () => typeof window !== 'undefined' && !!localStorage.getItem('wg_token')
+  )
   const [pending, setPending] = useState<FormatId | null>(null)
   const [toast, setToast] = useState<string | null>(null)
 
@@ -226,6 +239,11 @@ export function DownloadPage() {
   const entryCount = entries.length
 
   function openModal(id: FormatId) {
+    // 已登录过（30 天 token 在 localStorage）直接放行下载，不再弹窗
+    if (authed) {
+      execDownload(id)
+      return
+    }
     setPending(id)
     setModal(true)
   }
@@ -247,7 +265,7 @@ export function DownloadPage() {
           <div className="dl-eyebrow">免费下载</div>
           <h1 className="dl-title">选择格式，开始下载</h1>
           <p className="dl-desc">
-            PDF 适合打印，Word 适合编辑批注，Markdown 适合笔记与 AI 工具。点击格式后，登录界面为预览状态，当前阶段直接下载。
+            PDF 适合打印，Word 适合编辑批注，Markdown 适合笔记与 AI 工具。点击格式后在公众号发送 6 位登录码即可解锁下载，登录 30 天内有效。
           </p>
           <div className="dl-meta">
             当前收录 {chapters.length} 章 · {entryCount} 条建议 · 数据即代码，随每次更新重排
@@ -288,6 +306,18 @@ export function DownloadPage() {
             execDownload(pending)
             setModal(false)
             setPending(null)
+          }}
+          onVerified={() => {
+            setAuthed(true)
+            // 稍作停留让用户看到「验证成功」，然后自动开始下载并关闭弹窗
+            const id = pending
+            if (id) {
+              window.setTimeout(() => {
+                execDownload(id)
+                setModal(false)
+                setPending(null)
+              }, 1500)
+            }
           }}
         />
       )}
