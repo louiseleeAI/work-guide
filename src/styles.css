@@ -3230,3 +3230,29 @@ button {
 .dl-logout:hover {
   color: #fff;
 }
+
+/* ===== 导航栏用户昵称 ===== */
+.nav-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  background: var(--blue-50);
+  border: 1px solid var(--blue-200);
+  color: var(--blue-700);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s ease;
+}
+
+.nav-user:hover {
+  background: var(--blue-100);
+}
