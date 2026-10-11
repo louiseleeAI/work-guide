@@ -177,7 +177,9 @@ function LoginModal({
               <span className="dlm-wx-dot" />
               微信登录
             </div>
-            <p className="dlm-hint">关注公众号后，发送下方的 6 位登录码，本页会自动登录。</p>
+            <p className="dlm-hint">
+              关注公众号后，在公众号聊天窗口<b>直接发送</b>这 6 位数字（就像给朋友发微信消息一样），本页会自动登录。
+            </p>
             <div className="dlm-code-card">
               <div className="dlm-code-label">在公众号发送这 6 位登录码</div>
               <div className="dlm-code-row">
