@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { chapters, entries } from '../data'
 import { downloadMarkdown, downloadWord, goPrint } from '../lib/download'
+import wechatBanner from '../assets/wechat-search-banner.jpg'
 
 /** 格式卡片数据：一比一对应参考站的五个格式位 */
 const FORMATS = [
@@ -164,15 +165,12 @@ function LoginModal({
         </div>
 
         <div className="dlm-body">
-          <div className="dlm-qr-zone">
-            <div className="dlm-qr-card">
-              <div className="dlm-qr-placeholder">
-                <span>公众号</span>
-                <span>二维码</span>
-              </div>
-            </div>
-          </div>
           <div className="dlm-form">
+            <img
+              className="dlm-banner"
+              src={wechatBanner}
+              alt="微信搜一搜：菠萝君学AI（扫码关注公众号）"
+            />
             <div className="dlm-wechat-label">
               <span className="dlm-wx-dot" />
               微信登录

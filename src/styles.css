@@ -3274,3 +3274,12 @@ button {
     display: none;
   }
 }
+
+/* ===== 公众号搜索横幅（登录弹窗） ===== */
+.dlm-banner {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 10px;
+  margin: 0 0 16px;
+}
