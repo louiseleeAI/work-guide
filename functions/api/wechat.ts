@@ -73,10 +73,12 @@ export const onRequestPost: Ctx = async (context) => {
       const state = await context.env.KV.get(`code:${digits}`)
       if (state === 'pending') {
         await context.env.KV.put(`code:${digits}`, 'verified', { expirationTtl: 600 })
+        const origin = new URL(context.request.url).origin
+        const loginLink = `${origin}/#/wechat-login?code=${digits}`
         return textReply(
           from,
           to,
-          '✓ 验证成功！回到网页，页面会自动登录并解锁下载。本条回复来自「高性价比打工指南」。'
+          `【已确认，高性价比打工指南网页会自动登录，请回到原来的网页继续。\n\n原网页已关闭，或想在这里登录？点此直接登录：\n${loginLink}\n\n链接 5 分钟有效，仅可使用一次，请勿转发。如果这不是你本人的操作，请忽略本消息。】`
         )
       }
     } catch {

@@ -3154,3 +3154,61 @@ button {
   background: #1f8f4e;
   animation: none;
 }
+
+/* ===== 一键登录落地页（公众号回复链接） ===== */
+.wl-wrap {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 64px 24px;
+}
+
+.wl-card {
+  max-width: 460px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow: var(--shadow-lg);
+}
+
+.wl-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--blue-600);
+  margin-bottom: 14px;
+}
+
+.wl-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.wl-sub {
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: #4b5563;
+  margin: 0 0 22px;
+  overflow-wrap: anywhere;
+}
+
+.wl-cta {
+  display: inline-block;
+  background: var(--blue-600);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: 10px;
+}
+
+.wl-cta:hover {
+  background: var(--blue-700);
+}

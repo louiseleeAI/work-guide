@@ -8,6 +8,7 @@ import { Daily } from './pages/Daily'
 import { AntiPage } from './pages/AntiPage'
 import { DownloadPage } from './pages/DownloadPage'
 import { PrintPage } from './pages/PrintPage'
+import { WechatLoginPage } from './pages/WechatLoginPage'
 import { SiteFooter } from './components/SiteFooter'
 import { StaticPage } from './pages/StaticPage'
 
@@ -20,6 +21,7 @@ type Route =
   | { name: 'daily' }
   | { name: 'anti' }
   | { name: 'download' }
+  | { name: 'wechat-login'; code: string }
   | { name: 'print'; mode: 'full' | 'simple' }
   | { name: 'static'; id: string }
 
@@ -32,6 +34,10 @@ function parseHash(): Route {
   if (head === 'daily') return { name: 'daily' }
   if (head === 'anti') return { name: 'anti' }
   if (head === 'download') return { name: 'download' }
+  if (head.startsWith('wechat-login')) {
+    const m = h.match(/[?&]code=(\d{6})/)
+    return { name: 'wechat-login', code: m ? m[1] : '' }
+  }
   if (head === 'print') return { name: 'print', mode: arg === 'simple' ? 'simple' : 'full' }
   if (head === 'chapter' && arg) return { name: 'chapter', id: arg }
   if (head === 'entry' && arg) return { name: 'entry', id: arg }
@@ -104,6 +110,7 @@ export default function App() {
         {route.name === 'daily' && <Daily />}
         {route.name === 'anti' && <AntiPage />}
         {route.name === 'download' && <DownloadPage />}
+        {route.name === 'wechat-login' && <WechatLoginPage code={route.code} />}
         {route.name === 'print' && <PrintPage mode={route.mode} />}
         {route.name === 'static' && <StaticPage id={route.id} />}
       </main>
