@@ -77,11 +77,9 @@ type LoginState =
  *  onVerified：验证成功时回调父级（父级负责放行下载并关弹窗）。 */
 function LoginModal({
   onClose,
-  onSkip,
   onVerified,
 }: {
   onClose: () => void
-  onSkip: () => void
   onVerified: () => void
 }) {
   const [state, setState] = useState<LoginState>({ phase: 'starting' })
@@ -102,8 +100,7 @@ function LoginModal({
         poll(j.code)
       } catch {
         if (!alive) return
-        const code = String(Math.floor(100000 + Math.random() * 900000))
-        setState({ phase: 'local', code })
+        setState({ phase: 'local', code: '' })
       }
     }
 
@@ -139,7 +136,7 @@ function LoginModal({
     }
   }, [])
 
-  const code = state.phase === 'starting' ? '……' : state.code
+  const code = state.phase === 'starting' ? '……' : state.code || '——'
   const verified = state.phase === 'server' && state.status === 'ok'
 
   return (
@@ -195,25 +192,20 @@ function LoginModal({
               <div className="dlm-status">
                 <span className={`dlm-status-dot${verified ? ' ok' : ''}`} />
                 {state.phase === 'starting' && '正在生成登录码…'}
-                {state.phase === 'local' && '登录服务未连接（本地预览或未部署）——当前阶段免登录直接下载'}
+                {state.phase === 'local' && '登录服务暂不可用，请稍后刷新重试'}
                 {state.phase === 'server' && state.status === 'pending' && '等待你在微信中发送…'}
                 {verified && '验证成功，登录已生效（30 天有效）'}
               </div>
             </div>
             {state.phase === 'local' && (
               <div className="dlm-beta-note">
-                登录服务正在接入公众号后台，当前阶段所有格式<b>免登录直接下载</b>。
+                登录服务开小差了，<b>刷新页面</b>重新获取登录码；多次失败请稍后再来。
               </div>
             )}
             {verified && (
               <div className="dlm-beta-note">
                 <b>已验证。</b>文件马上自动开始下载；若浏览器拦截，请允许「多个文件下载」或在弹窗关闭后重试。关注公众号可第一时间收到章节更新。
               </div>
-            )}
-            {!verified && (
-              <button className="dlm-skip" onClick={onSkip}>
-                跳过登录，直接下载 →
-              </button>
             )}
           </div>
         </div>
@@ -366,11 +358,6 @@ export function DownloadPage() {
       {modal && (
         <LoginModal
           onClose={() => {
-            setModal(false)
-            setPending(null)
-          }}
-          onSkip={() => {
-            execDownload(pending)
             setModal(false)
             setPending(null)
           }}
