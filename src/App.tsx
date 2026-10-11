@@ -73,7 +73,66 @@ function Nav({ route }: { route: Route }) {
       <a href="#/download" className={isDownload ? 'on' : ''}>
         下载
       </a>
+      <UserChip routeKey={route.name + ('id' in route ? route.id : '')} />
     </nav>
+  )
+}
+
+/** 登录用户昵称（服务端 KV 存取）。未登录不显示；点击可改昵称。 */
+function UserChip({ routeKey }: { routeKey: string }) {
+  const [name, setName] = useState<string | null>(null)
+  const [token, setToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    let t: string | null = null
+    try {
+      t = localStorage.getItem('wg_token')
+    } catch {
+      t = null
+    }
+    setToken(t)
+    if (!t) return
+    fetch(`/api/user?token=${encodeURIComponent(t)}`)
+      .then((r) => r.json())
+      .then((j: { ok: boolean; name?: string | null }) => {
+        if (j.ok && j.name) setName(j.name)
+      })
+      .catch(() => {})
+  }, [routeKey])
+
+  if (!token) return null
+
+  async function editName() {
+    if (!token) return
+    const input = window.prompt('设置你的昵称（20 字以内，登录设备间同步）', name || '')
+    if (input === null) return
+    const next = input.trim()
+    if (!next || [...next].length > 20) return
+    try {
+      const r = await fetch('/api/user', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ token, name: next }),
+      })
+      const j = (await r.json()) as { ok: boolean; name?: string }
+      if (j.ok && j.name) {
+        setName(j.name)
+        return
+      }
+    } catch {
+      /* fallthrough */
+    }
+    window.alert('昵称保存失败：登录服务暂不可用（本页需通过正式域名访问）')
+  }
+
+  return (
+    <button className="nav-user" onClick={editName} title="点击修改昵称">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="8.2" r="3.6" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M4.8 19.4c1.2-3.2 3.9-4.8 7.2-4.8s6 1.6 7.2 4.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+      {name || '设置昵称'}
+    </button>
   )
 }
 
