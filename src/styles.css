@@ -3212,3 +3212,21 @@ button {
 .wl-cta:hover {
   background: var(--blue-700);
 }
+
+.dl-logout {
+  display: inline-block;
+  margin-left: 14px;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--blue-300);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.dl-logout:hover {
+  color: #fff;
+}

@@ -269,6 +269,23 @@ export function DownloadPage() {
           </p>
           <div className="dl-meta">
             当前收录 {chapters.length} 章 · {entryCount} 条建议 · 数据即代码，随每次更新重排
+            {authed && (
+              <button
+                className="dl-logout"
+                onClick={() => {
+                  try {
+                    localStorage.removeItem('wg_token')
+                  } catch {
+                    /* ignore */
+                  }
+                  setAuthed(false)
+                  setToast('已退出登录，下次下载需重新验证')
+                  setTimeout(() => setToast(null), 4000)
+                }}
+              >
+                已登录（30 天有效）· 退出登录
+              </button>
+            )}
           </div>
         </div>
         <div className="dl-cards">
