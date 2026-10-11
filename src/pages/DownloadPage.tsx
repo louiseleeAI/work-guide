@@ -231,12 +231,15 @@ export function DownloadPage() {
   )
   const [pending, setPending] = useState<FormatId | null>(null)
   const [toast, setToast] = useState<string | null>(null)
+  const [wxHint, setWxHint] = useState(false)
 
   useEffect(() => {
     document.title = '下载全书 · 高性价比打工指南'
   }, [])
 
   const entryCount = entries.length
+  const inWeChat =
+    typeof window !== 'undefined' && /MicroMessenger/i.test(window.navigator.userAgent)
 
   function openModal(id: FormatId) {
     // 已登录过（30 天 token 在 localStorage）直接放行下载，不再弹窗
@@ -250,6 +253,11 @@ export function DownloadPage() {
 
   function execDownload(id: FormatId | null) {
     if (!id) return
+    // 微信内置浏览器不支持打印导出 PDF：给指引而不是跳打印页
+    if ((id === 'pdf-full' || id === 'pdf-simple') && inWeChat) {
+      setWxHint(true)
+      return
+    }
     if (id === 'pdf-full') goPrint('full')
     else if (id === 'pdf-simple') goPrint('simple')
     else if (id === 'word-full') downloadWord(true)
@@ -312,6 +320,48 @@ export function DownloadPage() {
       </p>
 
       {toast && <div className="dl-toast">{toast}</div>}
+
+      {wxHint && (
+        <div className="dl-modal-mask" onClick={() => setWxHint(false)}>
+          <div className="dl-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="dlm-head">
+              <div>
+                <div className="dlm-eyebrow">微信内导出 PDF</div>
+                <h3 className="dlm-title">需要先跳到浏览器</h3>
+                <p className="dlm-sub">微信内置浏览器不支持打印导出，两个办法任选：</p>
+              </div>
+              <button className="dlm-close" onClick={() => setWxHint(false)} aria-label="关闭">
+                ×
+              </button>
+            </div>
+            <div className="dlm-body">
+              <div className="dlm-form">
+                <p className="dlm-hint">
+                  <b>办法一（拿到 PDF）</b>
+                  <br />
+                  点右上角「···」→「在浏览器中打开」→ 在浏览器里重新点 PDF → 打印窗口选「另存为 PDF」。
+                  <br />
+                  <br />
+                  <b>办法二（手机更省事）</b>
+                  <br />
+                  直接下载 <b>Word</b> 或 <b>Markdown</b> 版本，手机上可以直接保存和查看。
+                </p>
+                <button
+                  className="dlm-skip"
+                  onClick={() => {
+                    setWxHint(false)
+                    downloadMarkdown(true)
+                    setToast('Markdown 版已开始下载')
+                    setTimeout(() => setToast(null), 4000)
+                  }}
+                >
+                  直接下载 Markdown 版 →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {modal && (
         <LoginModal

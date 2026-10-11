@@ -15,14 +15,26 @@ function thresholdLine(e: Entry): string {
 }
 
 export function PrintPage({ mode }: { mode: 'full' | 'simple' }) {
+  const inWeChat =
+    typeof navigator !== 'undefined' && /MicroMessenger/i.test(navigator.userAgent)
+
   useEffect(() => {
     document.title = mode === 'full' ? '完整版（打印）· 高性价比打工指南' : '精简版（打印）· 高性价比打工指南'
+    // 微信内置浏览器不支持 window.print()，不弹打印窗口，只展示引导
+    if (inWeChat) return
     const t = setTimeout(() => window.print(), 600)
     return () => clearTimeout(t)
-  }, [mode])
+  }, [mode, inWeChat])
 
   return (
     <div className="print-book">
+      {inWeChat && (
+        <div className="print-hint">
+          <b>微信内无法直接导出 PDF。</b>
+          请点右上角「···」→「在浏览器中打开」，然后在浏览器菜单里选「打印」→「另存为 PDF」。
+          手机上更省事的做法：返回下载页，直接下载 Word / Markdown 版本。
+        </div>
+      )}
       <h1 className="pb-title">{book.title}</h1>
       <p className="pb-sub">{book.subtitle}</p>
       <p className="pb-meta">

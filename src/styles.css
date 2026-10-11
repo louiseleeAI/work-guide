@@ -3256,3 +3256,21 @@ button {
 .nav-user:hover {
   background: var(--blue-100);
 }
+
+/* ===== 微信内打印引导 ===== */
+.print-hint {
+  margin: 0 0 24px;
+  background: var(--amber-50, #fff8e6);
+  border: 1px solid var(--amber-200, #f0d896);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #5a4a1a;
+}
+
+@media print {
+  .print-hint {
+    display: none;
+  }
+}
