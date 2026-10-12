@@ -85,6 +85,19 @@ export function StaticPage({ id }: { id: string }) {
         ))}
       </div>
 
+      {id === 'contact' && (
+        <p className="sec-head mt-l" style={{ display: 'block' }}>
+          <span className="sh-note">把反馈发到</span>
+          <a
+            href="mailto:louiseai@foxmail.com?subject=%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94%E6%89%93%E5%B7%A5%E6%8C%87%E5%8D%97%E5%8F%8D%E9%A6%88"
+            style={{ fontSize: 18, fontWeight: 600 }}
+          >
+            louiseai@foxmail.com
+          </a>
+          <span className="sh-note">（点击直接写邮件，主题已帮你填好）</span>
+        </p>
+      )}
+
       {id === 'about' && (
         <div className="sec-head mt-l">
           <h2>当前进度</h2>
