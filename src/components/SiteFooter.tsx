@@ -63,9 +63,6 @@ export function SiteFooter() {
                 <span>加入社群</span>
               </button>
               <a href="#/contact">反馈与纠错</a>
-              <a href="https://github.com/eternity4719/HowToLiveBetter" target="_blank" rel="noreferrer">
-                原书仓库
-              </a>
             </div>
           </div>
 
