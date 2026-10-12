@@ -32,7 +32,7 @@ export function SiteFooter() {
                 高性价比打工指南
                 <span className="lf-mark">✳</span>
               </div>
-              <p>把好建议，过成好生活</p>
+              <p>用会算的账，打明白的工</p>
               <button
                 type="button"
                 className="lf-share"
