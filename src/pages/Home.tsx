@@ -102,37 +102,100 @@ export function Home() {
         <DailyTeaser />
 
         <div className="sec-head">
-          <h2>从最关心的章节开始</h2>
-          <span className="sh-note">按打工生命周期编排</span>
+          <h2>你现在最头疼什么</h2>
+          <span className="sh-note">直达对应章节，比从头翻快</span>
         </div>
 
-        <div className="ch-flow">
-          {chapters.map((c) => (
-            <a className="ch-row" key={c.id} href={`#/chapter/${c.id}`}>
-              <div className="cr-art">
-                <ChapterArt chapterId={c.id} />
-              </div>
-              <div>
-                <div className="cr-title">
-                  <span className="cr-no">第 {c.number} 章</span>
-                  {c.title}
-                </div>
-                <div className="cr-part">{c.part}</div>
-              </div>
-              <div className="cr-count">{countOfChapter(c.id)} 条建议</div>
-              <div className="cr-arrow">
-                <Arrow />
-              </div>
-            </a>
-          ))}
+        <ProblemNav />
+
+        <div className="sec-head">
+          <h2>从最关心的章节开始</h2>
+          <span className="sh-note">按打工生命周期编排 · 全书已完成</span>
         </div>
+
+        <PartFlow />
 
         <p style={{ fontSize: 13.5, color: 'var(--ink-4)', marginTop: 20, lineHeight: 1.8 }}>
-          已完成 8 章：进场全部 5 章（简历投递、面试、offer 总包、谈薪、背调入职），
-          在职的通勤与加班，风险的合同的坑。覆盖三种收益口径，全部算例可验算。
-          完整骨架共 28 篇 + 反面清单，其余章节按同一标准推进中。
+          全书 28 章 93 条已全部完成，覆盖三种收益口径，全部算例可验算。
+          另有<a href="#/anti"> 反面清单</a>：10 个「你以为 / 实际上 / 代价」，专治想当然。
+          内容会持续修订，法条时效以官方发布为准。
         </p>
       </div>
+    </>
+  )
+}
+
+/** 问题导航：读者带着问题来，直达对应章节（对标参考站「你想为生活多留住什么」） */
+const PROBLEMS = [
+  { q: '怕被裁，想提前准备', sub: '第 20 章 · 被裁当天：按小时排的操作清单', href: '#/chapter/ch20' },
+  { q: '要谈薪，不知道怎么开口', sub: '第 04 章 · 把年包换成到手，再换成时薪', href: '#/chapter/ch04' },
+  { q: '焦虑 35 岁', sub: '第 25 章 · 拆开看，是一组可提前应对的结构问题', href: '#/chapter/ch25' },
+  { q: '想跳槽，不知道值不值', sub: '第 23 章 · 把全书的变量合成一张表', href: '#/chapter/ch23' },
+  { q: '加班太狠，算算真实时薪', sub: '第 09 章 · 加班的真实时薪', href: '#/chapter/ch09' },
+  { q: '社保公积金怕断缴', sub: '第 17 章 · 断缴比少缴更贵', href: '#/chapter/ch17' },
+]
+
+function ProblemNav() {
+  return (
+    <div className="qgrid">
+      {PROBLEMS.map((it) => (
+        <a className="qcard" key={it.href} href={it.href}>
+          <div className="q-q">{it.q}</div>
+          <div className="q-a">{it.sub}</div>
+          <div className="q-go">
+            去看
+            <Arrow />
+          </div>
+        </a>
+      ))}
+    </div>
+  )
+}
+
+/** 章节流按「部分」分组渲染，组间加部分标签 */
+const PARTS: { name: string; range: string; note: string }[] = [
+  { name: '进场', range: '第 01–05 章', note: '从投简历到签字入职，每一步都能算' },
+  { name: '在职', range: '第 06–15 章', note: '把在职期间的每一项隐性收支显性化' },
+  { name: '风险', range: '第 16–22 章', note: '法条最密集的部分，出事前先读完' },
+  { name: '转折', range: '第 23–28 章', note: '跳槽、35 岁、转行与长期财务' },
+]
+
+function PartFlow() {
+  return (
+    <>
+      {PARTS.map((pt) => {
+        const list = chapters.filter((c) => c.part === pt.name)
+        if (!list.length) return null
+        return (
+          <div key={pt.name} className="part-block">
+            <div className={`part-label pl-${pt.name}`}>
+              <b>{pt.name}</b>
+              <span className="pl-range">{pt.range}</span>
+              <span className="pl-note">{pt.note}</span>
+            </div>
+            <div className="ch-flow">
+              {list.map((c) => (
+                <a className="ch-row" key={c.id} href={`#/chapter/${c.id}`}>
+                  <div className="cr-art">
+                    <ChapterArt chapterId={c.id} />
+                  </div>
+                  <div>
+                    <div className="cr-title">
+                      <span className="cr-no">第 {c.number} 章</span>
+                      {c.title}
+                    </div>
+                    <div className="cr-part">{c.part}</div>
+                  </div>
+                  <div className="cr-count">{countOfChapter(c.id)} 条建议</div>
+                  <div className="cr-arrow">
+                    <Arrow />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )
+      })}
     </>
   )
 }

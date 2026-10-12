@@ -3283,3 +3283,139 @@ button {
   border-radius: 10px;
   margin: 0 0 16px;
 }
+
+/* ===== 问题导航卡（首页「你现在最头疼什么」） ===== */
+.qgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.qcard {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 18px 14px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.qcard:hover {
+  border-color: var(--blue-300);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md, 0 6px 20px rgba(22, 24, 29, 0.06));
+}
+
+.q-q {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.q-a {
+  margin-top: 7px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+  flex: 1;
+}
+
+.q-go {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--blue-600);
+}
+
+.qcard:hover .q-go {
+  color: var(--blue-700);
+}
+
+@media (max-width: 860px) {
+  .qgrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .qgrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 章节流部分分组标签 ===== */
+.part-block + .part-block {
+  margin-top: 8px;
+}
+
+.part-label {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 30px 0 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.part-label b {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.pl-range {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-4);
+}
+
+.pl-note {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  margin-left: auto;
+  text-align: right;
+}
+
+.pl-进场 b {
+  color: var(--blue-700);
+}
+.pl-进场 {
+  border-bottom-color: var(--blue-200);
+}
+
+.pl-在职 b {
+  color: #17766a;
+}
+.pl-在职 {
+  border-bottom-color: #b4ddd4;
+}
+
+.pl-风险 b {
+  color: #96491a;
+}
+.pl-风险 {
+  border-bottom-color: #f0d3ba;
+}
+
+.pl-转折 b {
+  color: #5a3fa8;
+}
+.pl-转折 {
+  border-bottom-color: #d5c9f2;
+}
+
+@media (max-width: 640px) {
+  .pl-note {
+    display: none;
+  }
+}

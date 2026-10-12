@@ -98,7 +98,7 @@ export const entries: Entry[] = [
 export const book: BookMeta = {
   title: '高性价比打工指南',
   subtitle: '每条建议都写清楚：花掉什么，换回什么。能算出临界时薪的，把推导过程给你。',
-  updatedAt: '2026-10-07',
+  updatedAt: '2026-10-12',
   chapters,
   entries,
   disclaimer: DISCLAIMER,
