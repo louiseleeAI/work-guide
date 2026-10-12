@@ -142,7 +142,7 @@ export function SiteFooter() {
                 {AUTHOR_NAME}
               </a>
               . All rights reserved.
-              {SHOW_BUILD_CREDIT && ' Build with ❤ and AI'}
+              {SHOW_BUILD_CREDIT && ' Built with curiosity'}
             </div>
           </div>
         </div>
