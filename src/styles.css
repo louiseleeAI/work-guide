@@ -3709,3 +3709,260 @@ button {
     font-size: 14px;
   }
 }
+
+/* ===== 二期模块：证据分级 / 阈值三档 / 下载横条 / 反面清单 / FAQ / 收尾CTA ===== */
+.ev-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.ev-card {
+  background: #fdfcf9;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--blue-700);
+  border-radius: 12px;
+  padding: 22px 22px 18px;
+}
+
+.ev-g {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.ev-t {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.ev-d {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+
+.tier-card .tier-t {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.tier-hl {
+  background: #eef3ec;
+  border-color: #c9d6c4;
+}
+
+.fine-note {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--ink-4);
+  line-height: 1.7;
+}
+
+.fine-note a {
+  color: var(--blue-600);
+  font-weight: 600;
+}
+
+/* 横条区（下载 / 反面清单） */
+.band {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  align-items: center;
+  border-radius: 18px;
+  padding: 30px 34px;
+  margin-top: 46px;
+}
+
+.band-dl {
+  background: #e9eff5;
+  border: 1px solid #d3e0ea;
+}
+
+.band-dl .band-art {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #d3e0ea;
+}
+
+.band-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  color: #a4754e;
+  margin-bottom: 10px;
+}
+
+.band-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.band-desc {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--ink-3);
+  margin: 0 0 18px;
+}
+
+.band-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-ghost2 {
+  background: transparent;
+  border-color: #b9c7d4;
+  color: #3c4a57;
+}
+
+.btn-ghost2:hover {
+  border-color: #7d97ad;
+}
+
+.band-anti {
+  grid-template-columns: 1fr auto;
+  background: #f3ece4;
+  border: 1px solid #e3d5c5;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.band-anti:hover {
+  border-color: #b98a5e;
+}
+
+.band-anti .band-title {
+  margin-bottom: 6px;
+}
+
+.band-anti .band-desc {
+  margin-bottom: 0;
+}
+
+.band-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #3c4a57;
+  color: #fdfcf9;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 22px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.band-anti:hover .band-btn {
+  background: #2c3a47;
+}
+
+/* FAQ 折叠 */
+.faq-list {
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 18px 4px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '+';
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ink-4);
+  transition: transform 0.15s;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 4px 18px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+
+/* 墨蓝收尾 CTA */
+.cta-dark {
+  margin-top: 56px;
+  background: linear-gradient(180deg, #3a4a5a 0%, #2c3a47 100%);
+  border-radius: 20px;
+  padding: 64px 32px 58px;
+  text-align: center;
+}
+
+.cta-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: #b98a5e;
+  margin-bottom: 16px;
+}
+
+.cta-title {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #f3eee2;
+  margin-bottom: 14px;
+}
+
+.cta-sub {
+  font-size: 14.5px;
+  color: rgba(243, 238, 226, 0.7);
+  margin: 0 0 26px;
+}
+
+@media (max-width: 860px) {
+  .ev-grid {
+    grid-template-columns: 1fr;
+  }
+  .band {
+    grid-template-columns: 1fr;
+    padding: 24px 22px;
+  }
+  .band-anti {
+    grid-template-columns: 1fr;
+  }
+  .band-btn {
+    justify-self: start;
+  }
+  .cta-title {
+    font-size: 27px;
+  }
+}

@@ -123,11 +123,17 @@ export function Home() {
 
         <PartFlow />
 
-        <p style={{ fontSize: 13.5, color: 'var(--ink-4)', marginTop: 20, lineHeight: 1.8 }}>
-          全书 28 章 93 条已全部完成，覆盖三种收益口径，全部算例可验算。
-          另有<a href="#/anti"> 反面清单</a>：10 个「你以为 / 实际上 / 代价」，专治想当然。
-          内容会持续修订，法条时效以官方发布为准。
-        </p>
+        <EvidenceCards />
+
+        <TierSection />
+
+        <DownloadBand />
+
+        <AntiBand />
+
+        <Faq />
+
+        <CtaEnd />
       </div>
     </>
   )
@@ -205,6 +211,190 @@ function PartFlow() {
         )
       })}
     </>
+  )
+}
+
+/** 证据分级 A/B/C：信任感的最大来源，独立成节 */
+const EVIDENCE = [
+  {
+    g: 'A',
+    t: '有具体数字可查',
+    d: '来自法条原文、官方统计或可自行验算的推导，能查到具体数字。',
+    c: 'var(--blue-700)',
+  },
+  {
+    g: 'B',
+    t: '有研究或文件支持',
+    d: '有研究或政策文件依据，但缺少可直接套用的数字，或主要来自单项来源。',
+    c: '#17766a',
+  },
+  {
+    g: 'C',
+    t: '经验与通行做法',
+    d: '主要依据从业经验或公认做法——直说，不冒充 A 级。',
+    c: '#a4754e',
+  },
+]
+
+function EvidenceCards() {
+  return (
+    <>
+      <div className="sec-head">
+        <h2>先看依据，再决定相信多少</h2>
+        <span className="sh-note">证据分级 A / B / C</span>
+      </div>
+      <div className="ev-grid">
+        {EVIDENCE.map((it) => (
+          <div className="ev-card" key={it.g} style={{ borderTopColor: it.c }}>
+            <div className="ev-g" style={{ color: it.c }}>
+              {it.g}
+            </div>
+            <div className="ev-t">{it.t}</div>
+            <div className="ev-d">{it.d}</div>
+          </div>
+        ))}
+      </div>
+      <p className="fine-note">
+        分级是本站自己的标注。A 级也可能有争议——阅读时请一并留意适用条件。
+      </p>
+    </>
+  )
+}
+
+/** 阈值线三档：极高 / 高 / 一般 */
+function TierSection() {
+  const tiers = [
+    { t: '极高', d: '收益大，钱、时间、毅力三项成本都低或为零。', hl: true },
+    { t: '高', d: '收益大且成本不高，或收益中等、成本为零。', hl: false },
+    { t: '一般', d: '其余组合——结合自己的收入与处境，再衡量投入是否值得。', hl: false },
+  ]
+  return (
+    <>
+      <div className="sec-head">
+        <h2>值得相信，也要值得你去做</h2>
+        <span className="sh-note">看完依据，再算行动这笔账</span>
+      </div>
+      <div className="ev-grid">
+        {tiers.map((it) => (
+          <div className={`ev-card tier-card ${it.hl ? 'tier-hl' : ''}`} key={it.t}>
+            <div className="tier-t">{it.t}</div>
+            <div className="ev-d">{it.d}</div>
+          </div>
+        ))}
+      </div>
+      <p className="fine-note">
+        档位判断的分母是你的真实时薪——
+        <a href="#/calc">先去测算器算一次</a>
+        ，再看每条建议的阈值线。
+      </p>
+    </>
+  )
+}
+
+/** 下载横条：左插画 + 右标题与按钮 */
+function DownloadBand() {
+  return (
+    <div className="band band-dl">
+      <div className="band-art">
+        <ChapterArt chapterId="ch03" />
+      </div>
+      <div className="band-txt">
+        <div className="band-eyebrow">PDF / WORD / MARKDOWN · 免费下载</div>
+        <h3 className="band-title">免费下载《高性价比打工指南》</h3>
+        <p className="band-desc">
+          全书 28 章 93 条，含完整解释、算例推导与出处；公众号验证码登录后即可下载，
+          登录 30 天内有效。
+        </p>
+        <div className="band-actions">
+          <a className="btn btn-amber" href="#/download">
+            去下载全书
+            <Arrow />
+          </a>
+          <a className="btn btn-ghost2" href="#/explore">
+            先在线阅读
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/** 反面清单横条（对标参考站「避坑检测」） */
+function AntiBand() {
+  return (
+    <a className="band band-anti" href="#/anti">
+      <div className="band-txt">
+        <h3 className="band-title">反面清单：你以为的常识，实际上全是坑</h3>
+        <p className="band-desc">
+          10 条「你以为 / 实际上 / 代价」——竞业协议、被迫辞职、试用期陷阱，
+          每一条都标了法律后果。
+        </p>
+      </div>
+      <span className="band-btn">
+        打开反面清单
+        <Arrow />
+      </span>
+    </a>
+  )
+}
+
+/** FAQ 折叠 */
+const FAQS = [
+  {
+    q: '这本指南免费吗？',
+    a: '免费阅读、免费下载 PDF / Word / Markdown，没有付费墙，也不会有广告。',
+  },
+  {
+    q: '为什么要公众号登录才能下载？',
+    a: '一是把内容修订和纠错通知发给你，二是过滤机器批量抓取。验证一次 30 天内不再弹窗，取消关注也不影响已登录的设备。',
+  },
+  {
+    q: '算出来的数字准吗？',
+    a: '阈值线是算术推导，每条都给了过程，可以自己验算。社保、公积金等口径存在地区差异，条目内会单独标注「各地口径有差异」。',
+  },
+  {
+    q: '这是法律建议吗？',
+    a: '不是。法条都标注条款号和生效日期，但劳动争议的裁审口径因地区和个案而异，关键节点请咨询执业律师。',
+  },
+  {
+    q: '内容会持续更新吗？',
+    a: '会。法条修订、数字过时都会更新，更新日期见首页统计行。已关注公众号的读者会收到修订通知。',
+  },
+]
+
+function Faq() {
+  return (
+    <>
+      <div className="sec-head">
+        <h2>开始前，你可能想知道</h2>
+        <span className="sh-note">常见问题</span>
+      </div>
+      <div className="faq-list">
+        {FAQS.map((it) => (
+          <details className="faq-item" key={it.q}>
+            <summary>{it.q}</summary>
+            <p>{it.a}</p>
+          </details>
+        ))}
+      </div>
+    </>
+  )
+}
+
+/** 墨蓝收尾 CTA */
+function CtaEnd() {
+  return (
+    <div className="cta-dark">
+      <div className="cta-eyebrow">下一件小事</div>
+      <div className="cta-title">打工不必一次算完。</div>
+      <p className="cta-sub">
+        挑一章适合今天的，剩下的留给以后的自己。
+      </p>
+      <a className="btn btn-amber" href="#/explore">
+        开始阅读
+        <Arrow />
+      </a>
+    </div>
   )
 }
 
