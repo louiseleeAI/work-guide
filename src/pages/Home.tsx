@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { book, entries, chapters, countOfChapter, entryNo } from '../data'
+import { book, entries, chapters, countOfChapter, entryNo, entryMap, chapterMap } from '../data'
 import { Arrow, thresholdText } from '../components/common'
 import { calcSalary, type SalaryInput } from '../lib/calc'
 import { promptOfDay, loadDaily, streak } from '../lib/daily'
@@ -12,56 +12,64 @@ export function Home() {
 
   return (
     <>
-      <section className="hero">
+      <section className="hero hero-dark">
         <div className="wrap hero-grid">
           <div>
+            <div className="hero-eyebrow">✳ 每条建议都写清成本、收益与阈值线</div>
             <h1>
               高性价比
               <br />
               打工指南
             </h1>
             <p className="sub">
-              每条建议都写清楚：花掉什么，换回什么，以及
-              <b>你的时薪要到多少，这条才值得做</b>。
+              用最少的内耗和最明白的账，换回你对工作的掌控。
               内容以现行法律和官方数据为准，不用从头读到尾，挑眼下最关心的一章开始。
             </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href="#/explore">
-                从检索开始
+              <a className="btn btn-amber" href="#/calc">
+                3 分钟测出你的真实时薪
                 <Arrow />
               </a>
-              <a className="btn" href="#/daily">
-                今日一算
-              </a>
-              <a className="btn" href="#/calc">
-                算我的时薪
+              <a className="btn btn-ghost" href="#/explore">
+                开始阅读
+                <Arrow />
               </a>
             </div>
+            <a className="hero-dl" href="#/download">
+              免费下载全书 PDF / Word / Markdown
+              <Arrow />
+            </a>
           </div>
-          <LiveHourly />
+          <HeroPanel />
+        </div>
+
+        <div className="wrap">
+          <div className="stat-row hero-stats">
+            <div className="stat">
+              <div className="sv">{entries.length}</div>
+              <div className="sl">条建议</div>
+            </div>
+            <div className="stat">
+              <div className="sv">{chapters.length}</div>
+              <div className="sl">个章节</div>
+            </div>
+            <div className="stat">
+              <div className="sv">3</div>
+              <div className="sl">种收益口径，互不换算</div>
+            </div>
+            <div className="stat">
+              <div className="sv">{book.updatedAt.slice(5).replace('-', '.')}</div>
+              <div className="sl">内容更新至</div>
+            </div>
+          </div>
+          <div className="hero-band">
+            <span className="hb-item hb-1">进场</span>
+            <span className="hb-item hb-2">在职</span>
+            <span className="hb-item hb-3">风险</span>
+            <span className="hb-item hb-4">转折</span>
+          </div>
         </div>
       </section>
-
-      <div className="wrap">
-        <div className="stat-row" style={{ borderTop: 'none', paddingTop: 0, marginTop: 0 }}>
-          <div className="stat">
-            <div className="sv">{entries.length}</div>
-            <div className="sl">条建议</div>
-          </div>
-          <div className="stat">
-            <div className="sv">{chapters.length}</div>
-            <div className="sl">个章节</div>
-          </div>
-          <div className="stat">
-            <div className="sv">3</div>
-            <div className="sl">种收益口径，互不换算</div>
-          </div>
-          <div className="stat">
-            <div className="sv">{book.updatedAt.slice(5).replace('-', '.')}</div>
-            <div className="sl">内容更新至</div>
-          </div>
-        </div>
-      </div>
 
       <div className="wrap page">
         <div className="sec-head">
@@ -250,6 +258,125 @@ function DailyTeaser() {
         </div>
       </div>
     </a>
+  )
+}
+
+/** 精选条目：Hero 轮播池（冲击力优先，可随时换） */
+const FEATURED = [
+  'work-09-01',
+  'work-20-01',
+  'work-25-01',
+  'work-04-01',
+  'work-17-01',
+  'work-23-01',
+]
+
+/** Hero 右侧面板：精选条目轮播 / 实时时薪计算器，Tab 切换 */
+function HeroPanel() {
+  const [tab, setTab] = useState<'featured' | 'calc'>('featured')
+
+  return (
+    <div className="hp">
+      <div className="hp-tabs">
+        <button
+          type="button"
+          className={`hp-tab ${tab === 'featured' ? 'on' : ''}`}
+          onClick={() => setTab('featured')}
+        >
+          精选条目
+        </button>
+        <button
+          type="button"
+          className={`hp-tab ${tab === 'calc' ? 'on' : ''}`}
+          onClick={() => setTab('calc')}
+        >
+          时薪计算器
+        </button>
+      </div>
+      {tab === 'featured' ? <FeaturedCarousel /> : <LiveHourly />}
+    </div>
+  )
+}
+
+function FeaturedCarousel() {
+  const [i, setI] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [hover, setHover] = useState(false)
+  const n = FEATURED.length
+
+  useEffect(() => {
+    if (paused || hover) return
+    const t = window.setInterval(() => setI((v) => (v + 1) % n), 6000)
+    return () => window.clearInterval(t)
+  }, [paused, hover, n])
+
+  const e = entryMap.get(FEATURED[i])!
+  const ch = chapterMap.get(e.chapterId)!
+
+  return (
+    <div
+      className="fc"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      <div className="fc-card">
+        <div className="fc-art">
+          <ChapterArt chapterId={e.chapterId} />
+          <span className="fc-badge">{e.chapterId.replace('ch', '')}</span>
+        </div>
+        <div className="fc-body">
+          <div className="fc-eyebrow">
+            {entryNo(e)} / {ch.title}
+          </div>
+          <div className="fc-title">{e.title}</div>
+          <div className="fc-foot">
+            <span className="fc-th">{thresholdText(e)}</span>
+            <a className="fc-link" href={`#/entry/${e.id}`}>
+              看看怎么做
+              <Arrow />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="fc-controls">
+        <div className="fc-dots">
+          {FEATURED.map((id, di) => (
+            <button
+              key={id}
+              type="button"
+              aria-label={`第 ${di + 1} 条`}
+              className={`fc-dot ${di === i ? 'on' : ''}`}
+              onClick={() => setI(di)}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          className="fc-btn"
+          aria-label={paused ? '播放' : '暂停'}
+          onClick={() => setPaused(!paused)}
+        >
+          {paused ? '▶' : '❚❚'}
+        </button>
+        <button
+          type="button"
+          className="fc-btn"
+          aria-label="上一条"
+          onClick={() => setI((i + n - 1) % n)}
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          className="fc-btn"
+          aria-label="下一条"
+          onClick={() => setI((i + 1) % n)}
+        >
+          →
+        </button>
+      </div>
+    </div>
   )
 }
 
