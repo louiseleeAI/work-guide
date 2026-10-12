@@ -3420,57 +3420,57 @@ button {
   }
 }
 
-/* ===== 深色编辑风 Hero（对标参考站，蓝系移植） ===== */
+
+/* ===== 莫兰迪雾霾蓝 Hero（编辑风 · 浅色版） ===== */
 .hero.hero-dark {
-  background: linear-gradient(180deg, #0d2a52 0%, #0a2244 100%);
-  border-bottom: none;
-  color: #f3eee2;
+  background: linear-gradient(180deg, #dce6ee 0%, #cfdde8 100%);
+  border-bottom: 1px solid #bccbd8;
+  color: #2c3a47;
   padding: 72px 0 0;
 }
 
 .hero-dark h1 {
-  color: #f3eee2;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
+  color: #2c3a47;
 }
 
 .hero-eyebrow {
   font-family: var(--font-mono);
   font-size: 12.5px;
   letter-spacing: 0.14em;
-  color: #e8b04b;
+  color: #a4754e;
   margin-bottom: 18px;
 }
 
 .hero-dark .sub {
-  color: rgba(243, 238, 226, 0.82);
+  color: #4d5c6b;
 }
 
 .hero-dark .sub b {
-  color: #e8b04b;
+  color: #8a5f3d;
 }
 
 .btn-amber {
-  background: #e8b04b;
-  border-color: #e8b04b;
-  color: #1c1a14;
+  background: #b98a5e;
+  border-color: #b98a5e;
+  color: #fdfcf9;
   font-weight: 600;
 }
 
 .btn-amber:hover {
-  background: #d9a13d;
-  border-color: #d9a13d;
-  color: #1c1a14;
+  background: #a97a4e;
+  border-color: #a97a4e;
+  color: #fff;
 }
 
 .btn-ghost {
-  background: transparent;
-  border-color: rgba(243, 238, 226, 0.4);
-  color: #f3eee2;
+  background: rgba(255, 255, 255, 0.55);
+  border-color: #a9bccb;
+  color: #3c4a57;
 }
 
 .btn-ghost:hover {
-  border-color: rgba(243, 238, 226, 0.8);
-  color: #fff;
+  border-color: #7d97ad;
+  color: #2c3a47;
 }
 
 .hero-dl {
@@ -3479,15 +3479,15 @@ button {
   gap: 6px;
   margin-top: 18px;
   font-size: 13.5px;
-  color: rgba(243, 238, 226, 0.75);
+  color: #4d5c6b;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(243, 238, 226, 0.35);
+  border-bottom: 1px dashed #a9bccb;
   padding-bottom: 2px;
 }
 
 .hero-dl:hover {
-  color: #fff;
-  border-bottom-color: rgba(243, 238, 226, 0.7);
+  color: #2c3a47;
+  border-bottom-color: #7d97ad;
 }
 
 /* 面板 Tab */
@@ -3504,32 +3504,33 @@ button {
   font-weight: 500;
   padding: 7px 16px;
   border-radius: 999px;
-  border: 1px solid rgba(243, 238, 226, 0.3);
-  background: transparent;
-  color: rgba(243, 238, 226, 0.75);
+  border: 1px solid #b9c7d4;
+  background: rgba(255, 255, 255, 0.45);
+  color: #4d5c6b;
   cursor: pointer;
   transition: all 0.14s;
 }
 
 .hp-tab:hover {
-  border-color: rgba(243, 238, 226, 0.6);
-  color: #fff;
+  border-color: #7d97ad;
+  color: #2c3a47;
 }
 
 .hp-tab.on {
-  background: #f3eee2;
-  border-color: #f3eee2;
-  color: #0d2a52;
+  background: #2f3a45;
+  border-color: #2f3a45;
+  color: #eef2f6;
   font-weight: 600;
 }
 
 /* 轮播卡 */
 .fc-card {
-  background: #fbf7ee;
+  background: #fdfcf9;
   border-radius: 16px;
   overflow: hidden;
   color: #16181d;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  border: 1px solid #e3dacc;
+  box-shadow: 0 18px 44px rgba(47, 58, 69, 0.12);
 }
 
 .fc-art {
@@ -3543,13 +3544,13 @@ button {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #fbf7ee;
-  color: #0d2a52;
+  background: #fdfcf9;
+  color: #2c3a47;
   font-family: var(--font-mono);
   font-size: 12px;
   display: grid;
   place-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(47, 58, 69, 0.15);
 }
 
 .fc-body {
@@ -3625,13 +3626,13 @@ button {
   border-radius: 50%;
   border: none;
   padding: 0;
-  background: rgba(243, 238, 226, 0.3);
+  background: #b9c7d4;
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .fc-dot.on {
-  background: #e8b04b;
+  background: #a4754e;
   width: 20px;
   border-radius: 4px;
 }
@@ -3640,9 +3641,9 @@ button {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid rgba(243, 238, 226, 0.35);
-  background: transparent;
-  color: #f3eee2;
+  border: 1px solid #b9c7d4;
+  background: rgba(255, 255, 255, 0.55);
+  color: #3c4a57;
   font-size: 12px;
   cursor: pointer;
   display: grid;
@@ -3651,30 +3652,30 @@ button {
 }
 
 .fc-btn:hover {
-  border-color: rgba(243, 238, 226, 0.7);
+  border-color: #7d97ad;
 }
 
-/* 统计行（深色版） */
+/* 统计行（莫兰迪版） */
 .hero-dark .stat-row {
   margin-top: 40px;
   padding-top: 30px;
-  border-top: 1px solid rgba(243, 238, 226, 0.16);
+  border-top: 1px solid rgba(47, 58, 69, 0.16);
 }
 
 .hero-dark .stat .sv {
-  color: #f3eee2;
+  color: #2c3a47;
   font-size: 34px;
 }
 
 .hero-dark .stat .sl {
-  color: rgba(243, 238, 226, 0.6);
+  color: #6a7885;
 }
 
-/* 四词色带 */
+/* 四词色带（莫兰迪降饱和） */
 .hero-band {
   display: flex;
   margin-top: 40px;
-  border-top: 1px solid rgba(243, 238, 226, 0.16);
+  border-top: 1px solid rgba(47, 58, 69, 0.16);
   padding: 20px 0;
 }
 
@@ -3688,16 +3689,16 @@ button {
 }
 
 .hb-1 {
-  color: #9fc2ec;
+  color: #7d97ad;
 }
 .hb-2 {
-  color: #8fcdc2;
+  color: #8aa89e;
 }
 .hb-3 {
-  color: #e8b04b;
+  color: #b08356;
 }
 .hb-4 {
-  color: #bcaef0;
+  color: #9a8fb8;
 }
 
 @media (max-width: 920px) {
