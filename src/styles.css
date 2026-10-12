@@ -140,19 +140,26 @@ button {
    顶部导航
    ========================= */
 .site-head {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid var(--line);
   position: sticky;
-  top: 0;
+  top: 10px;
   z-index: 100;
+  background: transparent;
+  border-bottom: none;
+  padding: 0 16px;
 }
 
 .site-head .inner {
   display: flex;
   align-items: center;
-  gap: 32px;
-  height: 62px;
+  gap: 28px;
+  height: 58px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 26px;
+  background: rgba(44, 58, 69, 0.92);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(47, 58, 69, 0.22);
 }
 
 .brand {
@@ -161,12 +168,12 @@ button {
   font-weight: 700;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  color: var(--blue-800);
+  color: #f3eee2;
 }
 
 .brand em {
   font-style: normal;
-  color: var(--ink-4);
+  color: rgba(243, 238, 226, 0.55);
   font-weight: 400;
   font-size: 13px;
   margin-left: 10px;
@@ -182,31 +189,31 @@ button {
 
 .nav a {
   font-size: 14px;
-  color: var(--ink-3);
+  color: rgba(243, 238, 226, 0.78);
   padding: 7px 14px;
   border-radius: var(--r-sm);
   transition: color 0.14s, background 0.14s;
 }
 
 .nav a:hover {
-  color: var(--blue-700);
-  background: var(--blue-50);
+  color: #fff;
+  background: rgba(243, 238, 226, 0.12);
 }
 
 .nav a.on {
-  color: var(--blue-700);
-  background: var(--blue-50);
+  color: #fff;
+  background: rgba(243, 238, 226, 0.14);
   font-weight: 500;
 }
 
 .nav-cta {
-  background: var(--blue-600) !important;
-  color: #fff !important;
+  background: #b98a5e !important;
+  color: #fdfcf9 !important;
   margin-left: 6px;
 }
 
 .nav-cta:hover {
-  background: var(--blue-700) !important;
+  background: #a97a4e !important;
 }
 
 /* =========================
@@ -4014,4 +4021,16 @@ button {
     padding: 28px 20px 24px;
     margin-top: 32px;
   }
+}
+
+/* 悬浮导航上的昵称胶囊（深色适配） */
+.nav .nav-user {
+  background: rgba(243, 238, 226, 0.12);
+  border-color: rgba(243, 238, 226, 0.25);
+  color: #f3eee2;
+}
+
+.nav .nav-user:hover {
+  background: rgba(243, 238, 226, 0.2);
+  color: #fff;
 }
