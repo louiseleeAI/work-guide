@@ -123,15 +123,21 @@ export function Home() {
 
         <PartFlow />
 
-        <EvidenceCards />
+        <div className="sec-band sb-blue">
+          <EvidenceCards />
+        </div>
 
-        <TierSection />
+        <div className="sec-band sb-green">
+          <TierSection />
+        </div>
 
         <DownloadBand />
 
         <AntiBand />
 
-        <Faq />
+        <div className="sec-band sb-sand">
+          <Faq />
+        </div>
 
         <CtaEnd />
       </div>

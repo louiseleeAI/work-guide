@@ -3966,3 +3966,52 @@ button {
     font-size: 27px;
   }
 }
+
+/* ===== 整段色块容器（模块节奏） ===== */
+.sec-band {
+  border-radius: 20px;
+  padding: 40px 36px 36px;
+  margin-top: 46px;
+}
+
+.sec-band .sec-head {
+  margin-top: 0;
+}
+
+.sb-blue {
+  background: #e9eff5;
+  border: 1px solid #d9e3ec;
+}
+
+.sb-green {
+  background: #eef3ec;
+  border: 1px solid #d9e3d4;
+}
+
+.sb-sand {
+  background: #f3ece4;
+  border: 1px solid #e3d5c5;
+}
+
+.sec-band .ev-card {
+  background: #fdfcf9;
+}
+
+.sec-band .ev-grid {
+  margin-top: 18px;
+}
+
+.sec-band .faq-item {
+  border-bottom-color: rgba(47, 58, 69, 0.14);
+}
+
+.sec-band .faq-item summary {
+  background: transparent;
+}
+
+@media (max-width: 860px) {
+  .sec-band {
+    padding: 28px 20px 24px;
+    margin-top: 32px;
+  }
+}
