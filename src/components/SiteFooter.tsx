@@ -75,12 +75,7 @@ export function SiteFooter() {
             <div className="lf-sources">
               <span className="lf-heading">内容来源与声明</span>
               <p>
-                本站为独立整理的打工人场景版本，非官方版本。框架与计价方法参考
-                <a href="https://howtolivebetter.net/" target="_blank" rel="noreferrer">
-                  {' '}
-                  《高性价比人生指南》
-                </a>
-                （HowToLiveBetter，作者
+                本站为独立创作的打工人场景版本，非官方版本，与原作无关联。创作灵感来自《高性价比人生指南》原作（作者
                 <a
                   href="https://github.com/eternity4719/HowToLiveBetter"
                   target="_blank"
@@ -89,7 +84,12 @@ export function SiteFooter() {
                   {' '}
                   eternity4719
                 </a>
-                ），内容已按打工人场景重写与增删，并新增「阈值线」判定口径。
+                ）；每日一问、检索与下载等功能形态参考读者网站
+                <a href="https://howtolivebetter.net/" target="_blank" rel="noreferrer">
+                  {' '}
+                  HowToLiveBetter.net
+                </a>
+                。全部条目内容为打工场景独立新写，未取用原作文字，并新增「阈值线」判定口径。
               </p>
               <p>
                 内容仅供参考，医疗、劳动、法律和财务事项请结合当地情况与专业意见。

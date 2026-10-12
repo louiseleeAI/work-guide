@@ -7,7 +7,7 @@
 一本写给一线城市打工人（月薪 1-3 万）的决策手册，28 章 93 条，覆盖打工生命周期全程：
 **进场 → 在职 → 风险 → 转折**，外加一份反面清单。
 
-灵感来自 [howtolivebetter.net](https://howtolivebetter.net) 的《高性价比人生指南》——感谢原作示范了「把建议写成可执行的账」这件事该怎么做。
+灵感来自 [eternity4719](https://github.com/eternity4719/HowToLiveBetter) 的《高性价比人生指南》原作，每日一问、检索与下载等功能形态参考读者网站 [HowToLiveBetter.net](https://howtolivebetter.net/)。感谢原作示范了「把建议写成可执行的账」这件事该怎么做。**本站全部条目内容为打工场景独立新写，未取用原作文字。**
 
 ## 和一般「职场建议」的区别
 
@@ -66,7 +66,7 @@ docs/                # 全书 Markdown 导出、方案文档
 
 ## License
 
-正文与内容采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)（与原作《高性价比人生指南》许可一致；引用请注明出处、附许可证链接并注明改动）；代码采用 MIT。
+内容为本站独立创作，选用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 便于转载与传播（转载请注明出处并附本许可证链接）；代码采用 MIT。
 引用的法律法规条文版权归原发布机构所有。
 
 ---

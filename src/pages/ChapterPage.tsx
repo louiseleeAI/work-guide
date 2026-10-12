@@ -78,7 +78,7 @@ export function ChapterPage({ id }: { id: string }) {
           <div style={{ marginBottom: 28 }}>
             {ch.sourceRepo && (
               <a className="srcbook" href={ch.sourceRepo} target="_blank" rel="noreferrer">
-                查看本章源文件
+                灵感对照：原作相关章节
                 <Arrow />
               </a>
             )}

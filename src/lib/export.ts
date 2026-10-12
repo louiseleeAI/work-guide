@@ -66,8 +66,8 @@ export function buildMarkdown(full: boolean): string {
   out.push(book.disclaimer)
   out.push('')
   out.push('> 来源：《高性价比打工指南》 https://louiseai.site ｜ 本版本源码：https://github.com/louiseleeAI/work-guide')
-  out.push('> 框架与计价方法参考《高性价比人生指南》（作者 eternity4719）：https://github.com/eternity4719/HowToLiveBetter')
-  out.push('> 正文遵循 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/ （转载/改编请注明出处并注明改动）')
+  out.push('> 创作灵感来自《高性价比人生指南》原作（作者 eternity4719）：https://github.com/eternity4719/HowToLiveBetter ；功能形态参考读者网站 HowToLiveBetter.net')
+  out.push('> 内容为独立新写，遵循 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/ （转载请注明出处并附许可证链接）')
   out.push('')
   for (const ch of chapters) {
     const es = entriesOfChapter(ch.id)
