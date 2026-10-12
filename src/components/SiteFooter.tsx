@@ -94,7 +94,7 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  github.com/louiseleeAI/work-guide
+                  louiseleeAI
                 </a>
                 {' · '}
                 正文遵循
