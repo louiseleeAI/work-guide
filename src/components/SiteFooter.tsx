@@ -75,23 +75,46 @@ export function SiteFooter() {
             <div className="lf-sources">
               <span className="lf-heading">内容来源与声明</span>
               <p>
-                本站为独立整理的打工场景版本，非官方版本。框架与计价方法参考
+                本站为独立整理的打工人场景版本，非官方版本。框架与计价方法参考
                 <a href="https://howtolivebetter.net/" target="_blank" rel="noreferrer">
                   {' '}
-                  HowToLiveBetter
+                  《高性价比人生指南》
                 </a>
-                ，新增「阈值线」判定口径。中文原作：
+                （HowToLiveBetter，作者
                 <a
                   href="https://github.com/eternity4719/HowToLiveBetter"
                   target="_blank"
                   rel="noreferrer"
                 >
+                  {' '}
                   eternity4719
                 </a>
+                ），内容已按打工人场景重写与增删，并新增「阈值线」判定口径。
               </p>
               <p>
-                内容仅供参考，劳动、法律和财务事项请结合当地情况与专业意见。
+                内容仅供参考，医疗、劳动、法律和财务事项请结合当地情况与专业意见。
                 {chapters.length > 0 && ' 本站已完成章节见下方导航。'}
+              </p>
+              <p>
+                本版本源码：
+                <a
+                  href="https://github.com/louiseleeAI/work-guide"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  github.com/louiseleeAI/work-guide
+                </a>
+                {' · '}
+                正文遵循
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {' '}
+                  CC BY 4.0
+                </a>
+                （与原作许可一致；改动详见源码提交记录）
               </p>
             </div>
 

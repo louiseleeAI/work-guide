@@ -65,7 +65,9 @@ export function buildMarkdown(full: boolean): string {
   out.push('')
   out.push(book.disclaimer)
   out.push('')
-  out.push('---')
+  out.push('> 来源：《高性价比打工指南》 https://louiseai.site ｜ 本版本源码：https://github.com/louiseleeAI/work-guide')
+  out.push('> 框架与计价方法参考《高性价比人生指南》（作者 eternity4719）：https://github.com/eternity4719/HowToLiveBetter')
+  out.push('> 正文遵循 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/ （转载/改编请注明出处并注明改动）')
   out.push('')
   for (const ch of chapters) {
     const es = entriesOfChapter(ch.id)

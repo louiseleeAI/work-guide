@@ -66,7 +66,7 @@ docs/                # 全书 Markdown 导出、方案文档
 
 ## License
 
-内容原创部分采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)；代码采用 MIT。
+正文与内容采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)（与原作《高性价比人生指南》许可一致；引用请注明出处、附许可证链接并注明改动）；代码采用 MIT。
 引用的法律法规条文版权归原发布机构所有。
 
 ---
