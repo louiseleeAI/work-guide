@@ -14,7 +14,7 @@ const PLATFORMS = [
     /** 是否有「点击加入」按钮：微信只能扫码，没有深链 */
     joinable: false,
     /** 二维码有效期提示 */
-    expiry: '此二维码长期有效。若已失效，请通过反馈页联系。',
+    expiry: '群二维码 7 天有效（至 2026-10-19）。若已过期，请通过反馈页联系我们获取新码。',
     joinLabel: '',
     joinUrl: '',
     accent: '#2b7a3d',
@@ -153,9 +153,6 @@ export function CommunityDialog({ onClose }: { onClose: () => void }) {
           {hasRealImage ? (
             <>
               <img src={platform.img} alt={`${platform.name}群二维码`} className="qr-img" />
-              <div className="qr-logo">
-                {platform.id === 'wechat' ? <WechatIcon /> : <FeishuIcon />}
-              </div>
             </>
           ) : qrDataUrl ? (
             <>
