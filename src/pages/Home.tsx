@@ -506,8 +506,11 @@ function FeaturedCarousel() {
     return () => window.clearInterval(t)
   }, [paused, hover, n])
 
-  const e = entryMap.get(FEATURED[i])!
-  const ch = chapterMap.get(e.chapterId)!
+  const entry = entryMap.get(FEATURED[i])
+  const e = entry ?? entries[0]
+  const ch = chapterMap.get(e.chapterId)
+
+  if (!e || !ch) return null
 
   return (
     <div
