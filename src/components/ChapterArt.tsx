@@ -23,45 +23,45 @@ type Palette = {
   amberSoft: string
 }
 
-/** 蓝（进场，主色·莫兰迪雾霾蓝） */
+/** 进场：墨蓝（结构色） */
 const BLUE: Palette = {
-  bg: '#eef3f7',
-  line: '#c9d8e3',
-  blue: '#8fa9bf',
-  deep: '#4d6b84',
-  soft: '#aec3d4',
-  amber: '#b98a5e',
-  amberSoft: '#e3cfb8',
+  bg: '#f7f4ee',
+  line: '#ddd5c8',
+  blue: '#5b7285',
+  deep: '#22303d',
+  soft: '#c3ccd3',
+  amber: '#b4784f',
+  amberSoft: '#e5cbb6',
 }
 
 const PALETTES: Record<string, Palette> = {
   进场: BLUE,
   在职: {
-    bg: '#eef4f1',
-    line: '#d7e6df',
-    blue: '#7fa89a',
-    deep: '#476d61',
-    soft: '#b6d0c7',
-    amber: '#b98a5e',
-    amberSoft: '#e3cfb8',
+    bg: '#f4f6f3',
+    line: '#d8e0d8',
+    blue: '#4b6f63',
+    deep: '#2c463d',
+    soft: '#c3d2ca',
+    amber: '#b4784f',
+    amberSoft: '#e5cbb6',
   },
   风险: {
-    bg: '#f9f0ea',
-    line: '#e8d5c4',
-    blue: '#c08a63',
-    deep: '#8f5f3d',
-    soft: '#ddc3ac',
-    amber: '#a85147',
-    amberSoft: '#e6c4bc',
+    bg: '#faf2ee',
+    line: '#e8d3ca',
+    blue: '#a3483c',
+    deep: '#632c26',
+    soft: '#ddbfb7',
+    amber: '#a3483c',
+    amberSoft: '#e3c2ba',
   },
   转折: {
-    bg: '#f2f0f7',
-    line: '#e0dbee',
-    blue: '#9a8fc0',
-    deep: '#615a85',
-    soft: '#cdc6e2',
-    amber: '#b98a5e',
-    amberSoft: '#e3cfb8',
+    bg: '#f4f3f6',
+    line: '#ddd9e5',
+    blue: '#6a6285',
+    deep: '#3f3a52',
+    soft: '#c9c4d6',
+    amber: '#b4784f',
+    amberSoft: '#e5cbb6',
   },
 }
 

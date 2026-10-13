@@ -15,7 +15,7 @@ export function Home() {
       <section className="hero hero-dark">
         <div className="wrap hero-grid">
           <div>
-            <div className="hero-eyebrow">✳ 每条建议都写清成本、收益与阈值线</div>
+            <div className="hero-eyebrow">每条建议都写清成本、收益与阈值线</div>
             <h1>
               高性价比
               <br />
