@@ -1,59 +1,60 @@
 /* =========================================================
    高性价比打工指南 · 设计系统
-   主色：蓝色系。阈值提醒用琥珀。红色只留给法律后果。
+   配色：莫兰迪雾霾蓝主色 + 陶土强调。法律后果仍用降饱和红。
+   全站单一强调色：陶土（--amber-* 已转为陶土色阶）。
    ========================================================= */
 
 :root {
-  /* ---- 主色：蓝 ---- */
-  --blue-50: #eef5fd;
-  --blue-100: #d9e8fa;
-  --blue-200: #bcd6f4;
-  --blue-300: #8fb9ea;
-  --blue-400: #5a93dc;
-  --blue-500: #3576c9;
-  --blue-600: #1d5cab;
-  --blue-700: #154a8c;
-  --blue-800: #123a6e;
-  --blue-900: #0e2a52;
+  /* ---- 主色：莫兰迪雾霾蓝 ---- */
+  --blue-50: #eef3f7;
+  --blue-100: #dfe8ef;
+  --blue-200: #c9d8e3;
+  --blue-300: #aec3d4;
+  --blue-400: #8fa9bf;
+  --blue-500: #7593ab;
+  --blue-600: #5f7f99;
+  --blue-700: #4d6b84;
+  --blue-800: #3d5670;
+  --blue-900: #2f4152;
 
-  /* ---- 阈值提醒：琥珀 ---- */
-  --amber-50: #fdf6ec;
-  --amber-100: #fae9d0;
-  --amber-200: #f3d3a3;
-  --amber-500: #d99a3a;
-  --amber-600: #b87a1f;
-  --amber-700: #8f5c12;
-  --amber-800: #6b440c;
+  /* ---- 强调色：陶土（阈值提醒、主按钮） ---- */
+  --amber-50: #f8f2ec;
+  --amber-100: #f1e5d8;
+  --amber-200: #e3cfb8;
+  --amber-500: #b98a5e;
+  --amber-600: #a1734a;
+  --amber-700: #7f5a3a;
+  --amber-800: #5f432c;
 
-  /* ---- 风险/法律后果：红（克制使用） ---- */
-  --red-50: #fdf0ef;
-  --red-100: #fadedb;
-  --red-200: #f2bdb7;
-  --red-600: #b3382f;
-  --red-700: #8a2a23;
-  --red-800: #6b201b;
+  /* ---- 风险/法律后果：降饱和红（克制使用） ---- */
+  --red-50: #faf1ef;
+  --red-100: #f2ded9;
+  --red-200: #e6c4bc;
+  --red-600: #a85147;
+  --red-700: #83403a;
+  --red-800: #653330;
 
-  /* ---- 收益口径辅助色 ---- */
-  --teal-50: #e9f7f2;
-  --teal-100: #c4ead9;
-  --teal-600: #10806a;
-  --teal-700: #0b6353;
-  --violet-50: #f1eefe;
-  --violet-100: #d8d1f6;
-  --violet-600: #5b4ec0;
-  --violet-700: #473c9c;
+  /* ---- 收益口径辅助色（莫兰迪化） ---- */
+  --teal-50: #eef4f1;
+  --teal-100: #d7e6df;
+  --teal-600: #5c8b7d;
+  --teal-700: #476d61;
+  --violet-50: #f2f0f7;
+  --violet-100: #e0dbee;
+  --violet-600: #7c73a8;
+  --violet-700: #615a85;
 
   /* ---- 中性 ---- */
   --ink: #16181d;
   --ink-2: #3f434c;
   --ink-3: #6b7280;
   --ink-4: #9aa1ac;
-  --line: #e3e7ee;
-  --line-2: #cfd6e0;
-  --line-3: #b4bdca;
+  --line: #e4e7ea;
+  --line-2: #d2d7dd;
+  --line-3: #b8bfc7;
   --paper: #ffffff;
-  --paper-2: #f7f9fc;
-  --paper-3: #eef2f8;
+  --paper-2: #f7f8f9;
+  --paper-3: #eff1f4;
 
   /* ---- 字体 ----
      标题用衬线：中文里衬线更显书卷气，贴合「指南」调性
@@ -611,7 +612,7 @@ button {
 
 .sample-th .stb {
   font-size: 13.5px;
-  color: #8a6414;
+  color: #7f5a3a;
   line-height: 1.68;
   margin-top: 7px;
 }
@@ -893,7 +894,7 @@ button {
 
 .d-th .dth-below {
   font-size: 14px;
-  color: #8a6414;
+  color: #7f5a3a;
   line-height: 1.72;
   margin-top: 11px;
   padding-top: 11px;
@@ -3090,15 +3091,15 @@ button {
 }
 
 .pb-en-sum {
-  border-left: 3px solid #1d5cab;
+  border-left: 3px solid #b98a5e;
   padding-left: 10px;
   color: #3f434c;
   margin: 0 0 8px;
 }
 
 .pb-en-th {
-  background: #fdf6ec;
-  border: 1px solid #f3d3a3;
+  background: #f8f2ec;
+  border: 1px solid #e3cfb8;
   border-radius: 6px;
   padding: 8px 12px;
   font-size: 13px;
@@ -3111,7 +3112,7 @@ button {
 .pb-en-deriv {
   display: block;
   margin-top: 4px;
-  color: #8a6414;
+  color: #7f5a3a;
 }
 
 .pb-en-steps {

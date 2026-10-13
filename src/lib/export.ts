@@ -133,6 +133,6 @@ export function buildWordHtml(full: boolean): string {
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(book.title)}</title>
 <style>body{font-family:'Songti SC',SimSun,serif;line-height:1.8;max-width:42em;margin:0 auto;padding:2em;color:#16181d}
 h1{font-size:1.9em}h2{border-bottom:1px solid #ccc;padding-bottom:6px}h3{margin-top:1.6em}
-blockquote{border-left:3px solid #1d5cab;margin:0;padding-left:12px;color:#3f434c}
+blockquote{border-left:3px solid #b98a5e;margin:0;padding-left:12px;color:#3f434c}
 small{color:#6b7280}</style></head><body>${parts.join('\n')}</body></html>`
 }
