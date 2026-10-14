@@ -9,6 +9,94 @@
 
 灵感来自 [eternity4719](https://github.com/eternity4719/HowToLiveBetter) 的《高性价比人生指南》原作，每日一问、检索与下载等功能形态参考读者网站 [HowToLiveBetter.net](https://howtolivebetter.net/)。感谢原作示范了「把建议写成可执行的账」这件事该怎么做。**本站全部条目内容为打工场景独立新写，未取用原作文字。**
 
+## 本书可能解决你的问题
+
+带着问题来，比从头翻快：
+
+| 你现在的处境 | 直接去这几章 |
+|---|---|
+| 简历投了没回音，想重写但不知道值不值 | [ch01 简历与投递](https://louiseai.site/#/chapter/ch01) |
+| 面试被问薪资不知道怎么答、offer 总包看不懂 | [ch03 总包拆解](https://louiseai.site/#/chapter/ch03) · [ch04 谈薪](https://louiseai.site/#/chapter/ch04) |
+| 加班很多但说不清亏在哪 | [ch09 加班的真实时薪](https://louiseai.site/#/chapter/ch09) |
+| 每年「涨 10%」是不是画饼 | [ch10 涨薪机制](https://louiseai.site/#/chapter/ch10) |
+| 合同里的竞业、试用期、空白期条款看不懂 | [ch16 合同的坑](https://louiseai.site/#/chapter/ch16) |
+| 换城市/断缴社保，不知道代价 | [ch17 社保公积金操作层](https://louiseai.site/#/chapter/ch17) |
+| 公司突然调岗降薪，怎么应对 | [ch19 调岗降薪](https://louiseai.site/#/chapter/ch19) |
+| 被裁当天一片空白，不知道先做什么 | [ch20 被裁当天](https://louiseai.site/#/chapter/ch20) |
+| 想仲裁但怕麻烦、怕输 | [ch21 仲裁全流程](https://louiseai.site/#/chapter/ch21) |
+| 35 岁焦虑，想提前应对 | [ch25 35 岁危机](https://louiseai.site/#/chapter/ch25) |
+| 想跳槽，不知道值不值 | [ch23 跳槽的账](https://louiseai.site/#/chapter/ch23) |
+| 想知道什么时候可以「裸辞」 | [ch24 留下还是走](https://louiseai.site/#/chapter/ch24) |
+
+## 怎么读
+
+三条路径，按你的状态选：
+
+1. **带着问题读**（推荐）：用上面的问题表直接进对应章节，每条 3 分钟，读完就能用
+2. **从头读**：进场 → 在职 → 风险 → 转折，按打工生命周期的顺序建立完整框架，约 3 小时
+3. **每天一条**：[每日一问](https://louiseai.site/#/daily) 每天一道「待算的账」，把阈值思维练成习惯
+
+每条建议的结构是固定的：**结论 → 阈值线 → 三步清单 → 推导与出处**。先看阈值线，再决定要不要细读。
+
+## 目录
+
+**进场（第 01–05 章）**
+
+| 章 | 标题 | 条数 |
+|---|---|---|
+| [01](https://louiseai.site/#/chapter/ch01) | 简历与投递：先算清再投 | 4 |
+| [02](https://louiseai.site/#/chapter/ch02) | 面试：这是一次采购，不是一次被评估 | 4 |
+| [03](https://louiseai.site/#/chapter/ch03) | offer 总包拆解 | 5 |
+| [04](https://louiseai.site/#/chapter/ch04) | 谈薪：把年包换成到手，再换成时薪 | 4 |
+| [05](https://louiseai.site/#/chapter/ch05) | 背调与入职：签字之前还能改什么 | 3 |
+
+**在职（第 06–15 章）**
+
+| 章 | 标题 | 条数 |
+|---|---|---|
+| [06](https://louiseai.site/#/chapter/ch06) | 通勤：每天多 1.5 小时是一笔明确的债 | 3 |
+| [07](https://louiseai.site/#/chapter/ch07) | 工位与健康：你每天要坐 8 小时的地方 | 3 |
+| [08](https://louiseai.site/#/chapter/ch08) | 请假与年假：休不掉的假是欠你的钱 | 3 |
+| [09](https://louiseai.site/#/chapter/ch09) | 加班的真实时薪 | 5 |
+| [10](https://louiseai.site/#/chapter/ch10) | 涨薪机制：把「每年涨 10%」查成实际数字 | 3 |
+| [11](https://louiseai.site/#/chapter/ch11) | 绩效与晋升：系数是谈出来的，名额是攒出来的 | 3 |
+| [12](https://louiseai.site/#/chapter/ch12) | 同事关系与职场政治：把人际的账也算清楚 | 3 |
+| [13](https://louiseai.site/#/chapter/ch13) | 副业与接私活：全书第一次真正用时薪阈值的地方 | 3 |
+| [14](https://louiseai.site/#/chapter/ch14) | 补充医疗与体检：公司给的隐性保障，用满才是你的 | 3 |
+| [15](https://louiseai.site/#/chapter/ch15) | 福利折现：哪些福利是真钱，哪些只是标签 | 3 |
+
+**风险（第 16–22 章）**
+
+| 章 | 标题 | 条数 |
+|---|---|---|
+| [16](https://louiseai.site/#/chapter/ch16) | 合同的坑：竞业、试用期、空白期 | 5 |
+| [17](https://louiseai.site/#/chapter/ch17) | 社保与公积金的操作层：断缴比少缴更贵 | 3 |
+| [18](https://louiseai.site/#/chapter/ch18) | 个税与汇算：每年 3 月到 6 月，有一笔钱等你确认 | 3 |
+| [19](https://louiseai.site/#/chapter/ch19) | 调岗降薪：公司单方面改条款，法律站在协商这边 | 3 |
+| [20](https://louiseai.site/#/chapter/ch20) | 被裁当天：按小时排的操作清单 | 3 |
+| [21](https://louiseai.site/#/chapter/ch21) | 仲裁全流程：免费、45 天、和对你不对称有利的程序 | 3 |
+| [22](https://louiseai.site/#/chapter/ch22) | 落户、居住证与档案：非现金资产的价值账 | 3 |
+
+**转折（第 23–28 章）**
+
+| 章 | 标题 | 条数 |
+|---|---|---|
+| [23](https://louiseai.site/#/chapter/ch23) | 跳槽的账：把全书的变量合成一张表 | 3 |
+| [24](https://louiseai.site/#/chapter/ch24) | 留下还是走：一张每年更新一次的决策表 | 3 |
+| [25](https://louiseai.site/#/chapter/ch25) | 35 岁危机：拆开看，它是一组可提前应对的结构问题 | 3 |
+| [26](https://louiseai.site/#/chapter/ch26) | 从执行到管理：带团队的真实成本，和另一条路 | 3 |
+| [27](https://louiseai.site/#/chapter/ch27) | 转行与技能迁移：行业层清零，通用层保留 | 3 |
+| [28](https://louiseai.site/#/chapter/ch28) | 长期财务：全书所有账的终点，是让「离开的选择权」永远存在 | 3 |
+
+另有 [反面清单](https://louiseai.site/#/anti)：10 条「你以为 / 实际上 / 代价」，专治想当然。
+
+## 赞赏
+
+如果哪条建议真的帮你省了钱或避了坑，欢迎扫码赞赏——**自愿，完全不影响任何内容的免费获取**：
+
+![赞赏码](docs/reward-qr.png)
+
+
 ## 和一般「职场建议」的区别
 
 **1. 阈值线，不是口号。**
